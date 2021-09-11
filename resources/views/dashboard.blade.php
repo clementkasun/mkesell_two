@@ -208,7 +208,9 @@
 <script src="../../js/DashboardJS/dash.js"></script>
 <!-- AdminLTE App -->
 <script>
-    $(function() {});
-    load_dash();
+    $(document)ready(function(){
+        load_dash();
+    });
+    
 </script>
 @endsection

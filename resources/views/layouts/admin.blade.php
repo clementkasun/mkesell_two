@@ -2,8 +2,8 @@
 <html>
 
     <head>
-        <meta name="csrf-token" content="{{--csrf_token()--}}" />
-        <meta name="api-token" content="{{--auth()->user()->api_token--}}" />
+        <meta name="csrf-token" content="{{csrf_token()}}" />
+        <meta name="api-token" content="{{auth()->user()->api_token}}" />
         @yield('styles')
     </head>
 

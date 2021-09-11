@@ -20,9 +20,7 @@ class CreateCustomersTable extends Migration
             $table->text('email')->nullable();
             $table->string('city');
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict')->onUpdate('cascade');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('restrict')->onUpdate('cascade');
             $table->timestamps();
         });
     }

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Vehicle;
+use App\Models\SparePart;
+use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PostController extends Controller {
@@ -18,18 +22,18 @@ class PostController extends Controller {
     public function store(Request $request) {
         try {
             DB::beginTransaction();
-
             $post_type = $request->post_type;
 
-            if ($post_type == 'vehicle') {
-                $post_vehice_data_save = Post::create([
+            $user_id = $request->user_id;
+            $customer = Customer::where('user_id', '=', $user_id)->first();
+            $customer_id = $customer->id;
+            $post_id = '';
+            if (strstr($post_type, "VEHI") || strstr($post_type, "WAN")) {
+                $vehicle_data_save = Vehicle::create([
                             'vehicle_type' => $request->vehicle_type,
-                            'vehicle_condition' => $request->vehicle_condition,
-                            'vehicle_make_id' => $request->vehicle_make_id,
                             'model' => $request->model,
                             'start_type' => $request->start_type,
                             'manufactured_year' => $request->manufactured_year,
-                            'price' => $request->price,
                             'on_going_lease' => $request->on_going_lease,
                             'transmission' => $request->transmission,
                             'fuel_type' => $request->fuel_type,
@@ -39,51 +43,41 @@ class PostController extends Controller {
                             'isPowerSteer' => $request->isPowerSteer,
                             'isPowerMirroring' => $request->isPowerMirroring,
                             'isPowerWindow' => $request->isPowerWindow,
-                            'additional_info' => $request->additional_info,
                 ]);
+                $vehicle_id = $vehicle_data_save->id;
+                $post_save = Post::create([
+                            'post_title' => $request->post_title,
+                            'post_type' => $post_type,
+                            'condition' => $request->condition,
+                            'price' => $request->price,
+                            'additional_info' => $request->additional_info,
+                            'make_id' => $request->make_id,
+                            'vehicle_id' => $vehicle_id,
+                            'cust_id' => $customer_id,
+                            'location' => $request->location,
+                ]);
+                $post_id = $post_save->id;
             }
-            if ($post_type == 'spare_part') {
-                $post_spare_part_save = SparePart::create([
-                            'part_condition' => $request->part_condition,
-                            'part_used_in' => $request->part_used_in,
+            if (strstr($post_type, "SPARE")) {
+                $spare_part_save = SparePart::create([
+                            'part_used_in' => $request->vehicle_type,
                             'part_category' => $request->part_category,
-                            'part_name_brand' => $request->part_name_brand,
-                            'price' => $request->price,
-                            'additional_info' => $request->additional_info
                 ]);
-            }
-            if ($post_type == 'wanted') {
-                $post_wanted_data_save = Post::create([
-                            'vehicle_type' => $request->vehicle_type,
-                            'vehicle_condition' => $request->vehicle_condition,
-                            'vehicle_make_id' => $request->vehicle_make_id,
-                            'model' => $request->model,
-                            'start_type' => $request->start_type,
-                            'manufactured_year' => $request->manufactured_year,
+                $spare_id = $spare_part_save->id;
+                $post_save = Post::create([
+                            'post_title' => $request->post_title,
+                            'post_type' => $post_type,
+                            'condition' => $request->condition,
                             'price' => $request->price,
-                            'on_going_lease' => $request->on_going_lease,
-                            'transmission' => $request->transmission,
-                            'fuel_type' => $request->fuel_type,
-                            'engine_capacity' => $request->engine_capacity,
-                            'millage' => $request->millage,
-                            'isAc' => $request->isAc,
-                            'isPowerSteer' => $request->isPowerSteer,
-                            'isPowerMirroring' => $request->isPowerMirroring,
-                            'isPowerWindow' => $request->isPowerWindow,
                             'additional_info' => $request->additional_info,
+                            'make_id' => $request->make_id,
+                            'spare_part_id' => $request->spare_part_id,
+                            'cust_id' => $customer_id,
+                            'location' => $request->location,
                 ]);
+                $post_id = $post_save->id;
             }
 
-            Post::create([
-                'post_title' => $request->post_title,
-                'post_type' => $request->post_type,
-                'vehicle_id' => $post_vehice_data_save->vehicle_id,
-                'spare_part_id' => $post_spare_part_save->spare_part_id,
-                'wanted_id' => $post_wanted_data_save->wanted_id,
-            ]);
-
-            $post_id = $post_save->id;
-            $random_name = uniqid($post_id);
             $request->validate([
                 'main_image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
                 'image_one' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
@@ -92,60 +86,58 @@ class PostController extends Controller {
                 'image_four' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
                 'image_five' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
             ]);
-
             //get the post to update
             $image_path_update = Post::find($post_id);
-
+            $random_name = uniqid($post_id);
             if ($request->main_image != null) {
                 $main_ext = $request->main_image->extension();
-                $path_main_img = '/public/post_images' . '/' . $post_id . '/' . 'img_main' . '.' . $random_name . '.' . $main_ext;
-                $open_post_img_main = Image::make($request->nic);
-                $open_post_img_main->save($path_main_img, 60);
-                $image_path_update->main_image = $request->main_image;
+                $path_main = $request->file('main_image')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'main_img' . '.' . $random_name . '.' . $main_ext
+                );
+                $image_path_update->main_image = str_replace("public/", "/", $path_main);
             }
-
             if ($request->image_one != null) {
-                $image_one_ext = $request->image_one->extension();
-                $path_img_one = '/public/post_images' . '/' . $post->id . '/' . 'img_one' . '.' . $random_name . '.' . $image_one_ext;
-                $open_post_img_one = Image::make($request->nic);
-                $open_post_img_one->save($path_img_one, 60);
-                $image_path_update->image_1 = $request->image_one;
+                $img_one_ext = $request->image_one->extension();
+                $path_one = $request->file('image_one')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_one' . '.' . $random_name . '.' . $img_one_ext
+                );
+                $image_path_update->image_1 = str_replace("public/", "/", $path_one);
             }
-
             if ($request->image_two != null) {
-                $image_two_ext = $request->image_two->extension();
-                $path_img_two = '/public/post_images' . '/' . $post->id . '/' . 'img_two' . '.' . $random_name . '.' . $image_two_ext;
-                $open_post_img_two = Image::make($request->nic);
-                $open_post_img_two->save($path_img_two, 60);
-                $image_path_update->image_2 = $request->image_two;
+                $img_two_ext = $request->image_two->extension();
+                $path_two = $request->file('image_two')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_two' . '.' . $random_name . '.' . $img_two_ext
+                );
+                $image_path_update->image_2 = str_replace("public/", "/", $path_two);
             }
-
             if ($request->image_three != null) {
-                $image_three_ext = $request->image_three->extension();
-                $path_img_three = '/public/post_images' . '/' . $post->id . '/' . 'img_three' . '.' . $random_name . '.' . $image_three_ext;
-                $open_post_img_three = Image::make($request->nic);
-                $open_post_img_three->save($path_img_three, 60);
-                $image_path_update->image_3 = $request->image_three;
+                $img_three_ext = $request->image_three->extension();
+                $path_three = $request->file('image_three')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_three' . '.' . $random_name . '.' . $img_three_ext
+                );
+                $image_path_update->image_3 = str_replace("public/", "/", $path_three);
             }
-
             if ($request->image_four != null) {
-                $image_four_ext = $request->image_four->extension();
-                $path_img_four = '/public/post_images' . '/' . $post->id . '/' . 'img_four' . '.' . $random_name . '.' . $image_four_ext;
-                $open_post_img_four = Image::make($request->nic);
-                $open_post_img_four->save($path_img_four, 60);
-                $image_path_update->image_4 = $request->image_four;
+                $img_four_ext = $request->image_four->extension();
+                $path_four = $request->file('image_four')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_four' . '.' . $random_name . '.' . $img_four_ext
+                );
+                $image_path_update->image_4 = str_replace("public/", "/", $path_main);
             }
-
             if ($request->image_five != null) {
-                $image_five_ext = $request->image_five->extension();
-                $path_img_five = '/public/post_images' . '/' . $post->id . '/' . 'img_five' . '.' . $random_name . '.' . $image_five_ext;
-                $open_post_img_five = Image::make($request->nic);
-                $open_post_img_five->save($path_img_five, 60);
-                $image_path_update->image_5 = $request->image_five;
+                $img_five_ext = $request->image_five->extension();
+                $path_five = $request->file('image_five')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_five' . '.' . $random_name . '.' . $img_five_ext
+                );
+                $image_path_update->image_5 = str_replace("public/", "/", $path_five);
             }
-
             $image_path_update->save();
-
             DB::commit();
             return array('status' => 1, 'msg' => 'Post created successfully!');
         } catch (Exception $e) {
@@ -160,8 +152,40 @@ class PostController extends Controller {
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post) {
-        $post_all = Post::all();
+    public function show() {
+        $post_all = Post::where('posts.deleted_at', '=', null)
+                        ->join('customers', 'posts.cust_id', 'customers.id')
+                        ->leftjoin('spare_parts', 'posts.spare_part_id', 'spare_parts.id')
+                        ->leftjoin('vehicles', 'posts.vehicle_id', 'vehicles.id')
+                        ->join('vehicle_makes', 'posts.make_id', 'vehicle_makes.id')
+                        ->select(
+                                'posts.id AS id',
+                                'posts.post_type',
+                                'posts.post_title',
+                                'posts.vehicle_id',
+                                'customers.id AS customer_id',
+                                'posts.main_image',
+                                'posts.condition',
+                                'vehicles.model',
+                                'posts.location',
+                                'vehicles.start_type',
+                                'vehicles.manufactured_year',
+                                'posts.price',
+                                'vehicles.on_going_lease',
+                                'vehicles.transmission',
+                                'vehicles.fuel_type',
+                                'vehicles.engine_capacity',
+                                'vehicles.millage',
+                                'vehicles.isAc',
+                                'vehicles.isPowerSteer',
+                                'vehicles.isPowerMirroring',
+                                'vehicles.isPowerWindow',
+                                'spare_parts.part_used_in',
+                                'spare_parts.part_category',
+                                'posts.additional_info',
+                                'posts.created_at'
+                        )->get();
+
         return $post_all;
     }
 
@@ -171,9 +195,156 @@ class PostController extends Controller {
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($post_id) {
-        $post_by_id = Post::where('id', $post_id)->first();
-        return $post_by_id;
+    public function filtered_adds(Request $request) {
+        $post_type = $request->post_type;
+        $vehi_type = $request->vehi_type;
+        $location = $request->location;
+        $price_range = $request->price_range;
+        $condition = $request->condition;
+        $make = $request->make;
+        $model = $request->model;
+
+        if ($post_type == "VEHI") {
+            $post = Post::when($post_type == "VEHI", function($p) {
+                        return $p->where('posts.deleted_at', '=', null)
+                                        ->join('customers', 'posts.cust_id', 'customers.id')
+                                        ->join('vehicles', 'posts.vehicle_id', 'vehicles.id')
+                                        ->join('vehicle_makes', 'posts.make_id', 'vehicle_makes.id');
+                    });
+
+            $post = $post->when($location != '', function($p) use($location) {
+                if ($location == 'Any') {
+                    return $p;
+                }
+                if ($location != 'Any') {
+                    return $p->where('posts.location', '=', $location);
+                }
+            });
+
+            $post = $post->when($make != '', function($p) use($make) {
+                return $p->where('make_id', '=', $make);
+            });
+
+            $post = $post->when($model != '', function($p) use($model) {
+                return $p->where('vehicles.model', '=', $model);
+            });
+
+            $post = $post->when($condition != null, function($p) use($condition) {
+                return $p->where('posts.condition', '=', $condition);
+            });
+
+            $post = $post->when($price_range != null && $price_range != 'Any', function($p) use($price_range) {
+                if ($price_range != '< 100000' && $price_range != '> 15 Million') {
+                    $min_price = (int) strstr($price_range, "-", true);
+                    $tmp_max_price = strstr($price_range, "-");
+                    $completed_max_price = (int) trim($tmp_max_price, '-');
+                    return $p->whereBetween('posts.price', [$min_price, $completed_max_price]);
+                }
+
+                if ($price_range == '< 100000') {
+                    return $p->where('posts.price', '<', 100000);
+                }
+                if ($price_range == '> 15 Million') {
+                    return $p->where('posts.price', '>', 15000000);
+                }
+            });
+
+            $post = $post->when($post_type == "VEHI", function($p) {
+                return $p->select(
+                                'posts.id AS id',
+                                'posts.post_type',
+                                'posts.post_title',
+                                'posts.main_image',
+                                'posts.condition',
+                                'model',
+                                'start_type',
+                                'manufactured_year',
+                                'posts.price',
+                                'on_going_lease',
+                                'transmission',
+                                'fuel_type',
+                                'engine_capacity',
+                                'millage',
+                                'isAc',
+                                'isPowerSteer',
+                                'isPowerMirroring',
+                                'isPowerWindow',
+                                'posts.additional_info',
+                                'posts.location',
+                                'posts.created_at'
+                );
+            });
+            $filtered_data = $post->get();
+            return $filtered_data;
+        }
+
+        if ($post_type == "SPARE") {
+            $spare = Post::when($post_type == "SPARE", function($p) {
+                        return $p->join('spare_parts', 'posts.spare_part_id', 'spare_parts.id');
+                    });
+
+            $spare = $spare->when($location != '', function($p) use($location) {
+                if ($location == 'Any') {
+                    return $p;
+                }
+                if ($location != 'Any') {
+                    return $p->where('posts.location', '=', $location);
+                }
+            });
+
+            $spare = $spare->when($condition != null, function($p) use($condition) {
+                return $p->where('posts.condition', '=', $condition);
+            });
+
+            $spare = $spare->when($price_range != null, function($p) use($price_range) {
+                if ($price_range == 'ANY' || $price_range == 'Any Price Range') {
+                    return $p->where('posts.price', '=', '');
+                } else {
+                    if ($price_range != '< 100000' && $price_range != '> 15 Million') {
+                        $min_price = (int) strstr($price_range, "-", true);
+                        $tmp_max_price = strstr($price_range, "-");
+                        $completed_max_price = (int) trim($tmp_max_price, '-');
+                        return $p->whereBetween('posts.price', [$min_price, $completed_max_price]);
+                    } else {
+                        if ($price_range == '< 100000') {
+                            return $p->where('posts.price', '<', 100000);
+                        }
+                        if ($price_range == '> 15 Million') {
+                            return $p->where('posts.price', '>', 15000000);
+                        }
+                    }
+                }
+            });
+
+            $spare = $spare->when($post_type == "SPARE", function ($p) use($location) {
+                return $p->select(
+                                'posts.id AS id',
+                                'posts.post_type',
+                                'posts.post_title',
+                                'posts.main_image',
+                                'posts.condition',
+                                'spare_parts.part_used_in',
+                                'spare_parts.part_category',
+                                'posts.price',
+                                'posts.additional_info',
+                                'posts.created_at'
+                );
+            });
+            $filtered_data = $spare->get();
+            return $filtered_data;
+        }
+    }
+
+    public function get_selected_post($post_id) {
+        $post = Post::where('deleted_at', null)
+                ->join('customers', 'posts.cust_id', 'customers.id')
+                ->leftjoin('spare_parts', 'posts.spare_part_id', 'spare_parts.id')
+                ->leftjoin('vehicles', 'posts.vehicle_id', 'vehicles.id')
+                ->join('vehicle_makes', 'posts.make_id', 'vehicle_makes.id')
+                ->where('posts.id', $post_id)
+                ->first();
+
+        return $post;
     }
 
     /**
@@ -187,7 +358,38 @@ class PostController extends Controller {
         try {
             DB::beginTransaction();
 
-            $random_name = uniqid($post_id);
+            $post_type = $request->post_type;
+            //get the post from id
+            $post_update = Post::find($post_id);
+            $post_update->post_title = $request->post_title;
+            $post_update->post_type = $post_type;
+
+            if (strstr($post_type, "VEHI")) {
+                $vehicle_id = $post_update->vehicle_id;
+                $vehicle = Vehicle::find($vehicle_id);
+                $vehicle->model = $request->model;
+                $vehicle->start_type = $request->start_type;
+                $vehicle->manufactured_year = $request->manufactured_year;
+                $vehicle->on_going_lease = $request->on_going_lease;
+                $vehicle->transmission = $request->transmission;
+                $vehicle->fuel_type = $request->fuel_type;
+                $vehicle->engine_capacity = $request->engine_capacity;
+                $vehicle->millage = $request->millage;
+                $vehicle->isAc = $request->isAc;
+                $vehicle->isPowerSteer = $request->isPowerSteer;
+                $vehicle->isPowerMirroring = $request->isPowerMirroring;
+                $vehicle->isPowerWindow = $request->isPowerWindow;
+                $vehicle->save();
+            }
+
+            if (strstr($post_type, "SPARE")) {
+                $spare_part_id = $post_update->spare_part_id;
+                $spare_part_update = SparePart::find($spare_part_id);
+                $spare_part_update->part_used_in = $request->part_used_in;
+                $spare_part_update->part_category = $request->part_category;
+                $spare_part_update->save();
+            }
+
             $request->validate([
                 'main_image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
                 'image_one' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
@@ -197,71 +399,62 @@ class PostController extends Controller {
                 'image_five' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
             ]);
 
-            //get the post to update
-            $post_update = Post::find($post_id);
-
+            $random_name = uniqid($post_id);
             if ($request->main_image != null) {
                 $main_ext = $request->main_image->extension();
-                $path_main_img = '/public/post_images' . '/' . $post_id . '/' . 'img_main' . '.' . $random_name . '.' . $main_ext;
-                $open_post_img_main = Image::make($request->nic);
-                $open_post_img_main->save($path_main_img, 60);
+                $path_main = $request->file('main_image')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'main_img' . '.' . $random_name . '.' . $main_ext
+                );
+                $post_update->main_image = str_replace("public/", "/", $path_main);
             }
-
             if ($request->image_one != null) {
-                $image_one_ext = $request->image_one->extension();
-                $path_img_one = '/public/post_images' . '/' . $post->id . '/' . 'img_one' . '.' . $random_name . '.' . $image_one_ext;
-                $open_post_img_one = Image::make($request->nic);
-                $open_post_img_one->save($path_img_one, 60);
+                $img_one_ext = $request->image_one->extension();
+                $path_one = $request->file('image_one')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_one' . '.' . $random_name . '.' . $img_one_ext
+                );
+                $post_update->image_1 = str_replace("public/", "/", $path_one);
             }
-
             if ($request->image_two != null) {
-                $image_two_ext = $request->image_two->extension();
-                $path_img_two = '/public/post_images' . '/' . $post->id . '/' . 'img_two' . '.' . $random_name . '.' . $image_two_ext;
-                $open_post_img_two = Image::make($request->nic);
-                $open_post_img_two->save($path_img_two, 60);
+                $img_two_ext = $request->image_two->extension();
+                $path_two = $request->file('image_two')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_two' . '.' . $random_name . '.' . $img_two_ext
+                );
+                $post_update->image_2 = str_replace("public/", "/", $path_two);
             }
-
             if ($request->image_three != null) {
-                $image_three_ext = $request->image_three->extension();
-                $path_img_three = '/public/post_images' . '/' . $post->id . '/' . 'img_three' . '.' . $random_name . '.' . $image_three_ext;
-                $open_post_img_three = Image::make($request->nic);
-                $open_post_img_three->save($path_img_three, 60);
+                $img_three_ext = $request->image_three->extension();
+                $path_three = $request->file('image_three')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_three' . '.' . $random_name . '.' . $img_three_ext
+                );
+                $post_update->image_3 = str_replace("public/", "/", $path_three);
             }
-
             if ($request->image_four != null) {
-                $image_four_ext = $request->image_four->extension();
-                $path_img_four = '/public/post_images' . '/' . $post->id . '/' . 'img_four' . '.' . $random_name . '.' . $image_four_ext;
-                $open_post_img_four = Image::make($request->nic);
-                $open_post_img_four->save($path_img_four, 60);
+                $img_four_ext = $request->image_four->extension();
+                $path_four = $request->file('image_four')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_four' . '.' . $random_name . '.' . $img_four_ext
+                );
+                $post_update->image_4 = str_replace("public/", "/", $path_main);
             }
-
             if ($request->image_five != null) {
-                $image_five_ext = $request->image_five->extension();
-                $path_img_five = '/public/post_images' . '/' . $post->id . '/' . 'img_five' . '.' . $random_name . '.' . $image_five_ext;
-                $open_post_img_five = Image::make($request->nic);
-                $open_post_img_five->save($path_img_five, 60);
+                $img_five_ext = $request->image_five->extension();
+                $path_five = $request->file('image_five')->storeAs(
+                        '/public/post_images' . '/' . $post_id,
+                        'img_five' . '.' . $random_name . '.' . $img_five_ext
+                );
+                $post_update->image_5 = str_replace("public/", "/", $path_five);
             }
-
-            $post_update->post_type = $request->post_type;
-            $post_update->vehicle_id = $request->vehicle_id;
-            $post_update->spare_part_id = $request->spare_part_id;
-            $post_update->wanted_id = $request->wanted_id;
-            $post_update->post_title = $request->post_title;
-            $post_update->vehicle_id = $request->vehicle_id;
-            $post_update->spare_part_id = $request->spare_part_id;
-            $post_update->main_image = $path_main_img;
-            $post_update->image_1 = $path_img_one;
-            $post_update->image_2 = $path_img_two;
-            $post_update->image_3 = $path_img_three;
-            $post_update->image_4 = $path_img_four;
-            $post_update->image_5 = $path_img_five;
             $post_update->save();
 
             DB::commit();
-            return array('status' => 1, 'msg' => 'Post created successfully!');
+            return array('status' => 1, 'msg' => 'Post has Updated successfully!');
         } catch (Exception $e) {
             DB::rollBack();
-            return array('status' => 0, 'msg' => 'Post creation is Unsuccessfully!');
+            return array('status' => 0, 'msg' => 'Post Updation is Unsuccessfull!');
         }
     }
 
@@ -273,24 +466,23 @@ class PostController extends Controller {
      */
     public function destroy($id) {
         try {
-            
             $post = Post::find($id);
-            $post->delete();
             $post_data = $post->first();
-            
+
             $main_img_path = $post_data->main_image;
             $img_one_path = $post_data->image_1;
             $img_two_path = $post_data->image_2;
             $img_three_path = $post_data->image_3;
             $img_four_path = $post_data->image_4;
             $img_path_five = $post_data->image_5;
-            
+
             Storage::delete($main_img_path);
             Storage::delete($img_one_path);
             Storage::delete($img_two_path);
             Storage::delete($img_three_path);
             Storage::delete($img_four_path);
             Storage::delete($img_path_five);
+            $post->delete();
 
             return array('status' => 'Post Deleted Successfully!');
         } catch (Exception $e) {

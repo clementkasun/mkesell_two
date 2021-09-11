@@ -92,9 +92,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ url('/all_vacancies') }}" class="nav-link {{ Request::is('all_vacancies') ? 'active' : '' }}">
+                    <a href="{{ url('/all_adds_view') }}" class="nav-link {{ Request::is('all_adds_view') ? 'active' : '' }}">
                         <i class="fas fa-bookmark nav-icon"></i>
-                        <p>All Vacancy</p>
+                        <p>All Adds</p>
                     </a>
                 </li>
             </ul>

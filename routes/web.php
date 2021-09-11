@@ -28,18 +28,8 @@ Route::get('/test', function () {
 Route::get('/results/export', [JsonResultsController::class, 'index']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
-
-Route::get('/survey_setup', [App\Http\Controllers\TitleController::class, 'show']);
-Route::get('/survey_mapping', [\App\Http\Controllers\AttributeHierachyMappingController::class, 'index']);
-//Route::get('/survey_view/id/{id}', 'SurveyTitleController@view');
-Route::get('/survey_session', [App\Http\Controllers\SurveySessionController::class, 'load']);
-Route::get('/survey_template', [App\Http\Controllers\SurveySessionController::class, 'load_template']);
-
-Route::get('/survey_session', [App\Http\Controllers\SurveySessionController::class, 'load']);
-Route::get('/survey_template', [App\Http\Controllers\SurveySessionController::class, 'load_template']);
-Route::get('/location', [App\Http\Controllers\SurveySessionController::class, 'load_location']);
+    return view('home');
+})->name('home');
 
 // auth
 Route::get('/rolls', [App\Http\Controllers\RollController::class, 'index'])->name('system_Rolls');
@@ -70,8 +60,8 @@ Route::get('/category_element', [App\Http\Controllers\CategoryElementController:
 
 
 #graduate registration
-Route::middleware(['auth:sanctum', 'verified'])->get('/graduate_registration', function () {
-    return view('/registration/graduate_registration');
+Route::middleware(['auth:sanctum', 'verified'])->get('/post_registration', function () {
+    return view('/registration/post_registration');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/registered_graduates', function () {
@@ -134,6 +124,6 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/sms_report', function () 
     return view('/report/sms_report');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/all_vacancies', function () {
-    return view('/all_vacancies_view');
+Route::middleware(['auth:sanctum', 'verified'])->get('/all_adds_view_two', function () {
+    return view('/all_adds_view_two');
 });

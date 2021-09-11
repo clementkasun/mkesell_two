@@ -44,9 +44,10 @@ class VehicleMakeController extends Controller
      * @param  \App\Models\VehicleMake  $vehicleMake
      * @return \Illuminate\Http\Response
      */
-    public function show(VehicleMake $vehicleMake)
+    public function get_vehicle_makes(VehicleMake $vehicleMake)
     {
-        //
+       $vehicle_makes = VehicleMake::all();
+       return $vehicle_makes;
     }
 
     /**
