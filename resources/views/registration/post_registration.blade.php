@@ -2,7 +2,6 @@
 @extends('layouts.styles')
 @extends('layouts.scripts')
 @extends('layouts.navbar')
-@extends('layouts.sidebar')
 @extends('layouts.footer')
 @section('pageStyles')
 <!-- Select2 -->
@@ -48,7 +47,7 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-10">
-                <h1> Graduate Registration</h1>
+                <h1> Post Registration</h1>
             </div>
             <div class="col-sm-2">
                 <ol class="breadcrumb float-sm-right">
@@ -69,7 +68,7 @@
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Addvertiesment Registration form</h3>
+                        <h3 class="card-title">Advertiesment Registration form</h3>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -203,12 +202,6 @@
                                         <div><input type="text" class="form-control" name="manufactured_year" id="manufactured_year" placeholder="Please enter the manufactured year" required></div>
                                     </div>
                                     <div class="form-group">
-                                        <label for="on_going_lease">On Going Lease</label>
-                                        <div>
-                                            <input type="checkbox" name="on_going_lease" id="on_going_lease" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
                                         <label for="transmission">Transmission</label>
                                         <div>
                                             <input type="text" class="form-control" name="transmission" id="transmission" placeholder="Enter the transmission type" required>
@@ -238,30 +231,39 @@
                                             <input type="text" class="form-control" name="millage" id="millage" required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="isAc">AC</label>
-                                        <div>
-                                            <input type="checkbox" name="isAc" id="isAc" required>
+                                    <div class="row">
+                                        <div class="form-group col-lg-3">
+                                            <label for="isAc">AC</label>
+                                            <div>
+                                                <input type="checkbox" name="isAc" id="isAc" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label for="isPowerSteer">Power Steer</label><br>
+                                            <div class="form-check">
+                                                <input type="checkbox" name="isPowerSteer" id="isPowerSteer" class ="ml-0 pl-0" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label for="isPowerMirroring">Power Mirroring</label>
+                                            <div>
+                                                <input type="checkbox" name="isPowerMirroring" id="isPowerMirroring" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-lg-3">
+                                            <label for="isPowerWindow">Power Window</label>
+                                            <div>
+                                                <input type="checkbox" name="isPowerMirroring" id="isPowerWindow" required>
+                                            </div>
                                         </div>
                                     </div>
-                                    <!-- radio -->
-                                    <div class="form-group">
-                                        <label for="isPowerSteer">Power Steer</label>
-                                        <div class="form-check">
-                                            <input type="checkbox" name="isPowerSteer" id="isPowerSteer" required>
+                                    <div class="row">
+                                        <div class="form-group col-lg-3">
+                                        <label for="on_going_lease">On Going Lease</label>
+                                        <div>
+                                            <input type="checkbox" name="on_going_lease" id="on_going_lease" required>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="isPowerMirroring">Power Mirroring</label>
-                                        <div>
-                                            <input type="checkbox" name="isPowerMirroring" id="isPowerMirroring" required>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="isPowerWindow">Power Window</label>
-                                        <div>
-                                            <input type="checkbox" name="isPowerMirroring" id="isPowerWindow" required>
-                                        </div>
                                     </div>
                                 </section>
                                 <section id="spare_part_sec" class="d-none col-md-6">
@@ -366,7 +368,7 @@
 
 
 $('#post_type').change(function () {
-    if ($(this).val() == 'VEHICLE' || $(this).val() == 'WAN') {
+    if ($(this).val() == 'VEHICLE' || $(this).val() == 'WANTED') {
         $('#spare_part_sec').addClass('d-none');
         $('#vehicle_sec').removeClass('d-none');
     }
@@ -381,47 +383,39 @@ $('#post_type').change(function () {
 });
 
 $(window).on('load', function () {
-    loadDistrictCombo('DISTRICT_ID', function () {
-        loadelectrorateCombo('ElECTDIVISIONID', $('#district').val(), function () {
+    loadMakesCombo();
 
-        });
-        loadDsdivisionCombo('DSDIVISIONID', $('#district').val(), function () {
-            loadGndivisionCombo('GNDIVISIONID', $('#ds_division').val(), function () {
-
-            });
-        });
-    });
-    // $.when(
-    loadSectorsCombo('SECTORID', function () {
-        loadCategoryCombo('SERVICECATID', $('#sector').val(), function () {
-
-        });
-    });
-    // ).then(function(data, textStatus, jqXHR) {
-
-    // });
-
-    loadUniversityCombo('UNIVERSITY_ID');
-    $('#district').change(function () {
-        loadDsdivisionCombo('', $('#district').val(), function () {
-            loadGndivisionCombo('', $('#ds_division').val(), function () {
-
-            });
-        });
-    });
-    $('#district').change(function () {
-        loadelectrorateCombo('', $('#district').val());
-    });
-    $('#ds_division').change(function () {
-        loadGndivisionCombo('', $('#ds_division').val());
-    });
-    $('#sector').change(function () {
-        loadCategoryCombo('', $('#sector').val());
-    });
+    $('#post_type').select2();
+    $('#vehicle_type').select2();
+    $('#condition').select2();
+    $('#fuel_type').select2();
+    $('#part_category').select2();
 });
 
+function loadMakesCombo(selected, callBack) {
+    let option = '';
+    ajaxRequest("GET", "./api/get_makes/", null, function (resp) {
+        if (resp.length == 0) {
+            option += '<option value="">No Data</option>';
+        } else {
+            $.each(resp, function (index, row) {
+                if (!isNaN(parseInt(selected)) && selected == row.id) {
+                    option += '<option value="' + row.id + '" selected>' + row.make_name + '</option>';
+                } else {
+                    option += '<option value="' + row.id + '">' + row.make_name + '</option>';
+                }
+            });
+        }
+        $('#make_id').html(option);
+        $('#make_id').select2();
+        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+            callBack();
+        }
+    });
+}
+
 $("#save_post").click(function () {
-    
+
     let object = {
         user_id: $('#user_id').val(),
         post_type: $('#post_type').val(),
@@ -434,25 +428,25 @@ $("#save_post").click(function () {
         additional_info: $('#additional_info').val(),
         model: $('#model').val(),
         start_type: $('#start_type').val(),
-        manufactured_year: $('#on_going_lease').val(),
+        manufactured_year: $('#manufactured_year').val(),
         on_going_lease: $('input[name="on_going_lease"]:checked').val(),
         transmission: $("#transmission").val(),
         fuel_type: $("#fuel_type").val(),
         engine_capacity: $("#engine_capacity").val(),
         millage: $("#millage").val(),
         isAc: $('input[name="isAc"]:checked').val(),
-        isPowerSteer:$('input[name="isPowerSteer"]:checked').val(),
+        isPowerSteer: $('input[name="isPowerSteer"]:checked').val(),
         isPowerMirroring: $('input[name="isPowerMirroring"]:checked').val(),
         isPowerWindow: $('input[name="isPowerWindow"]:checked').val(),
         part_category: $('#part_category').val(),
     };
 
-     object.main_image = $('#main_image')[0].files[0];
-     object.image_one = $('#image_one')[0].files[0];
-     object.image_two = $('#image_two')[0].files[0];
-     object.image_three = $('#image_three')[0].files[0];
-     object.image_four = $('#image_four')[0].files[0];
-     object.image_five = $('#image_five')[0].files[0];
+    object.main_image = $('#main_image')[0].files[0];
+    object.image_one = $('#image_one')[0].files[0];
+    object.image_two = $('#image_two')[0].files[0];
+    object.image_three = $('#image_three')[0].files[0];
+    object.image_four = $('#image_four')[0].files[0];
+    object.image_five = $('#image_five')[0].files[0];
 
     let url = "./api/save_post";
     ulploadFileWithData(url, object, function (result) {

@@ -1,24 +1,3 @@
-function loadDistrictCombo(selected, callBack) {
-    let option = '';
-    ajaxRequest("GET", "/api/get_districts/", null, function (resp) {
-        if (resp.length == 0) {
-            option += '<option value="">No Data</option>';
-        } else {
-            $.each(resp, function (index, row) {
-                if (!isNaN(parseInt(selected)) && selected == row.id) {
-                    option += '<option value="' + row.id + '" selected>' + row.district_name + '</option>';
-                } else {
-                    option += '<option value="' + row.id + '">' + row.district_name + '</option>';
-                }
-            });
-        }
-        $('#district').html(option);
-        $('#district').select2();
-        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-            callBack();
-        }
-    });
-}
 
 function loadDsdivisionCombo(selected, district_id, callBack) {
     let option = '';
