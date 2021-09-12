@@ -37,7 +37,7 @@ Route::get('/welcome', function () {
 
 Route::get('/results/export', [JsonResultsController::class, 'index']);
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
 
