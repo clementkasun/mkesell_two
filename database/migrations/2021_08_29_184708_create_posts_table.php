@@ -14,12 +14,12 @@ class CreatePostsTable extends Migration {
     public function up() {
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('post_title')->nullable();
+            $table->string('post_title')->nullable();
             $table->string('post_type'); // Vehicle, Motercycle and Spare Parts
             $table->text('price')->nullable();
             $table->text('location')->nullable();
             $table->text('additional_info')->nullable();
-            $table->text('condition')->nullable();
+            $table->string('condition')->nullable();
             $table->text('main_image')->nullable();
             $table->text('image_1')->nullable();
             $table->text('image_2')->nullable();

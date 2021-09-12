@@ -407,7 +407,6 @@ function loadMakesCombo(selected, callBack) {
             });
         }
         $('#make_id').html(option);
-        $('#make_id').select2();
         if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
             callBack();
         }

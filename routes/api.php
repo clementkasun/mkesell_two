@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\VehicleMakeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TestJsonController;
 use App\Http\Controllers\JsonResultsController;
 
@@ -56,4 +57,5 @@ Route::delete('/delete_post/id/{post_id}', [PostController::class, 'destroy']);
 
 Route::get('get_makes', [VehicleMakeController::class, 'get_vehicle_makes']);
 
+Route::post('/save_customer', [CustomerController::class, 'store']);
 

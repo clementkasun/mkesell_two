@@ -203,6 +203,10 @@ class PostController extends Controller {
         $condition = $request->condition;
         $make = $request->make;
         $model = $request->model;
+        $year_min = $request->year_min;
+        $year_max = $request->year_max;
+        $gear_type = $request->gear_type;
+        $fuel_type = $request->fuel_type;
 
         if ($post_type == "VEHI") {
             $post = Post::when($post_type == "VEHI", function($p) {
@@ -231,6 +235,26 @@ class PostController extends Controller {
 
             $post = $post->when($condition != null, function($p) use($condition) {
                 return $p->where('posts.condition', '=', $condition);
+            });
+
+            $post = $post->when($condition != null, function($p) use($condition) {
+                return $p->where('posts.condition', '=', $condition);
+            });
+
+            $post = $post->when($year_min != '' && $year_max != '', function ($p) use($year_min, $year_max) {
+                return $p->whereBetween('vehicles.manufactured_year', [$year_min, $year_max]);
+            });
+
+            $post = $post->when($fuel_type != '', function ($p) use($fuel_type) {
+                return $p->where('vehicles.fuel_type', $fuel_type);
+            });
+
+            $post = $post->when($gear_type != '', function ($p) use($gear_type) {
+                return $p->where('vehicles.gear_type', $gear_type);
+            });
+            
+            $post = $post->when($vehi_type != '', function ($p) use($vehi_type) {
+                return $p->where('vehicles.vehicle_tyoe', $vehi_type);
             });
 
             $post = $post->when($price_range != null && $price_range != 'Any', function($p) use($price_range) {

@@ -10,23 +10,25 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="assets/img/favicon.png" rel="icon">
-        <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="./assets/img/favicon.png" rel="icon">
+        <link href="./assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <!--<link href="../../plugins/select2/js/select2.css" rel="stylesheet">-->
+        <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+        <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+        <link href="./assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+        <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+        <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+        <link href="./plugins/yearpicker/yearpicker.css" rel="stylesheet">
+        <link href="./plugins/select2/css/select2.css" rel="stylesheet">
+        <link rel="stylesheet" href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
 
         <!-- Template Main CSS File -->
-        <link href="assets/css/style.css" rel="stylesheet">
+        <link href="./assets/css/style.css" rel="stylesheet">
         <style>
 
             .add-font{
@@ -64,27 +66,30 @@
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                        <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                            <ul>
-                                <li><a href="./post_registration">ADD POST</a></li>
-                                <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                    <ul>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#"></a></li>
-                                        <li><a href="#">Deep Drop Down 3</a></li>
-                                        <li><a href="#">Deep Drop Down 4</a></li>
-                                        <li><a href="#">Deep Drop Down 5</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Drop Down 2</a></li>
-                                <li><a href="#">Drop Down 3</a></li>
-                                <li><a href="#">Drop Down 4</a></li>
-                            </ul>
-                        </li>
+                        <li><a class="nav-link scrollto" href="./post_registration">Post Add</a></li>
+                        <!--                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>-->
+                        <!--                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
+                                                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
+                                                    <ul>
+                                                        <li><a href="./post_registration">ADD POST</a></li>
+                                                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
+                                                            <ul>
+                                                                <li><a href="#"></a></li>
+                                                                <li><a href="#"></a></li>
+                                                                <li><a href="#">Deep Drop Down 3</a></li>
+                                                                <li><a href="#">Deep Drop Down 4</a></li>
+                                                                <li><a href="#">Deep Drop Down 5</a></li>
+                                                            </ul>
+                                                        </li>
+                                                        <li><a href="#">Drop Down 2</a></li>
+                                                        <li><a href="#">Drop Down 3</a></li>
+                                                        <li><a href="#">Drop Down 4</a></li>
+                                                    </ul>
+                                                </li>-->
+                        <li><a class="nav-link scrollto" href="#contact">Account</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                        <li><a class="getstarted scrollto" href="#about">Get Started</a></li>
+                        <li><a class="nav-link scrollto" href="./login_cust">Login</a></li>
+                        <li><a class="nav-link scrollto" href="./register_customer">Register</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -369,13 +374,13 @@
                         </div>
                         <div class="row m-2">
                             <div class="form-group col-lg-4">
-                                <label for=""><b>Year Range</b></label>
-                                <input type="date" id="year_range" class="form-control col-6"> 
+                                <label for=""><b>Year Range</b></label><br>
+                                <input type="text" id="year_min" class="yearpicker" value=""> <input type="text" id="year_max" class="yearpicker" value="">
                             </div>
                             <div class="form-group col-lg-4">
-                                <label for="cmb_model"><b>Gear</b></label>
+                                <label for="cmb_gear"><b>Gear</b></label>
                                 <div>
-                                    <select id="cmb_model"  class="form-control">
+                                    <select id="cmb_gear"  class="form-control">
                                         <option value="Any"> Any Gear </option>
                                         <option value="Automatic">Auto</option>
                                         <option value="Manual">Manual</option>
@@ -444,22 +449,26 @@
                 </footer>  End Footer  -->
 
         <!-- Vendor JS Files -->
-        <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="assets/vendor/php-email-form/validate.js"></script>
-        <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
+        <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+        <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+        <script src="./assets/vendor/php-email-form/validate.js"></script>
+        <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
         <script src="./plugins/jquery/jquery.min.js"></script>
         <script src="./js/commenFunctions/functions.js"></script>
-<!--        <script src="../../plugins/select2/js/select2.js"></script>-->
+        <script src="./plugins/yearpicker/yearpicker.js" async></script>
+        <script src="./plugins/select2/js/select2.js"></script>
+        <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
 
         <!-- Template Main JS File -->
-        <script src="assets/js/main.js"></script>
+        <script src="./assets/js/main.js"></script>
         <script>
             $(document).ready(function () {
                 loadMakes();
                 loadPostPage();
+                $('.yearpicker').yearpicker();
             });
+
             $('#search_adds').click(function () {
                 loadPostWithFiltering();
             });
@@ -484,10 +493,11 @@
             }
 
             function loadPostWithFiltering() {
-                let option = '';
                 let url = "./api/filtered_adds";
 
                 var form_obj = new Object();
+                $min_year = $('#year_min').val();
+                $max_year = $('#year_max').val();
                 form_obj.post_type = $('#cmb_post_type').val();
                 form_obj.vehi_type = $('#cmb_vehi_type').val();
                 form_obj.location = $('#cmb_city').val();
@@ -495,9 +505,25 @@
                 form_obj.condition = $('#cmb_condition').val();
                 form_obj.make = $('#cmb_make').val();
                 form_obj.model = $('#model').val();
-                form_obj.year_range = $('#year_range').val();
-                form_obj.cmb_fuel_type = $('#cmb_fuel_type').val();
+                form_obj.year_min = $min_year;
+                form_obj.year_max = $max_year;
+                form_obj.gear_type = $('#cmb_gear').val();
+                form_obj.fuel_type = $('#cmb_fuel_type').val();
 
+                if ($('#year_min').val() != '' && $('#year_max').val() != '') {
+                    if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
+                        Swal.fire('Post Registration', 'Year range is not correct!', 'error');
+                    } else {
+                        call_post_filter_api(url, form_obj);
+                    }
+                } else {
+                    call_post_filter_api(url, form_obj);
+                }
+            }
+
+
+            function call_post_filter_api(url, form_obj) {
+                let option = '';
                 try {
                     $.ajax({
                         type: "POST",
@@ -562,14 +588,17 @@
                         }
                     });
                 } catch (err) {
-                    alert(err);
-                    t(err);
+
                 }
             }
 
             function loadPostPage() {
-                let option = '';
                 let url = "./api/get_posts/";
+                call_form_unfiltered_api(url);
+            }
+
+            function call_form_unfiltered_api(url) {
+                let option = '';
                 try {
                     $.ajax({
                         type: "GET",
@@ -632,8 +661,7 @@
                         }
                     });
                 } catch (err) {
-                    alert(err);
-                    t(err);
+
                 }
             }
         </script>
