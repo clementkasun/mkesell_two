@@ -25,7 +25,8 @@
         <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
         <link href="./plugins/yearpicker/yearpicker.css" rel="stylesheet">
         <link href="./plugins/select2/css/select2.css" rel="stylesheet">
-        <link rel="stylesheet" href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
+        <link href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" >
+        <link href="./plugins/jqpaginator/jqpaginator.css" rel="stylesheet">
 
         <!-- Template Main CSS File -->
         <link href="./assets/css/style.css" rel="stylesheet">
@@ -67,25 +68,6 @@
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
                         <li><a class="nav-link scrollto" href="./post_registration">Post Add</a></li>
-                        <!--                        <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>-->
-                        <!--                        <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                                                <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                                                    <ul>
-                                                        <li><a href="./post_registration">ADD POST</a></li>
-                                                        <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                                                            <ul>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#"></a></li>
-                                                                <li><a href="#">Deep Drop Down 3</a></li>
-                                                                <li><a href="#">Deep Drop Down 4</a></li>
-                                                                <li><a href="#">Deep Drop Down 5</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a href="#">Drop Down 2</a></li>
-                                                        <li><a href="#">Drop Down 3</a></li>
-                                                        <li><a href="#">Drop Down 4</a></li>
-                                                    </ul>
-                                                </li>-->
                         <li><a class="nav-link scrollto" href="#contact">Account</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                         <li><a class="nav-link scrollto" href="./login_cust">Login</a></li>
@@ -459,6 +441,7 @@
         <script src="./plugins/yearpicker/yearpicker.js" async></script>
         <script src="./plugins/select2/js/select2.js"></script>
         <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
+        <script src="./plugins/jqpaginator/jqpaginator.js"></script>
 
         <!-- Template Main JS File -->
         <script src="./assets/js/main.js"></script>
@@ -468,11 +451,9 @@
                 loadPostPage();
                 $('.yearpicker').yearpicker();
             });
-
             $('#search_adds').click(function () {
                 loadPostWithFiltering();
             });
-
             function loadMakes() {
                 let option = '';
                 ajaxRequest("GET", "./api/get_makes", null, function (resp) {
@@ -494,7 +475,6 @@
 
             function loadPostWithFiltering() {
                 let url = "./api/filtered_adds";
-
                 var form_obj = new Object();
                 $min_year = $('#year_min').val();
                 $max_year = $('#year_max').val();
@@ -509,7 +489,6 @@
                 form_obj.year_max = $max_year;
                 form_obj.gear_type = $('#cmb_gear').val();
                 form_obj.fuel_type = $('#cmb_fuel_type').val();
-
                 if ($('#year_min').val() != '' && $('#year_max').val() != '') {
                     if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
                         Swal.fire('Post Registration', 'Year range is not correct!', 'error');
@@ -594,7 +573,10 @@
 
             function loadPostPage() {
                 let url = "./api/get_posts/";
-                call_form_unfiltered_api(url);
+                let datas = call_form_unfiltered_api(url);
+                var itemsPerPage = 1;
+
+                console.log(datas);
             }
 
             function call_form_unfiltered_api(url) {
@@ -664,6 +646,7 @@
 
                 }
             }
+
         </script>
     </body>
 
