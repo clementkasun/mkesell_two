@@ -1,7 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <img style="width: 240px; height: 85px;" src="./dist/img/Ceytech-2020-Logo.png">
+            <img style="width: 240px; height: 85px;" src="../../dist/img/Ceytech-2020-Logo.png">
             <p><b>VehicleWorld</b></p>
         </x-slot>
 
