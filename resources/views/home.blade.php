@@ -512,7 +512,7 @@
 //                                option += '<div class="portfolio-wrap">';
                                 option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
                                 option += '<div class="portfolio-info m-2 add-font">';
-                                if (row.post_title == null) {
+                                if (row.post_title != null) {
                                     option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";
                                 }
                                 if (row.vehicle_condition != null) {
@@ -582,7 +582,7 @@
 //                                option += '<div class="portfolio-wrap">';
                                 option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
                                 option += '<div class="portfolio-info m-2 add-font">';
-                                if (row.post_title == null) {
+                                if (row.post_title != null) {
                                     option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";
                                 }
                                 if (row.vehicle_condition != null) {
