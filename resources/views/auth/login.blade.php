@@ -2,7 +2,7 @@
     <x-jet-authentication-card>
         <x-slot name="logo">
             <img style="width: 240px; height: 85px;" src="../../dist/img/Ceytech-2020-Logo.png">
-            <p><b> Graduate Management System </b></p>
+            <p><b>VehicleWorld</b></p>
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />

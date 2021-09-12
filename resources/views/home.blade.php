@@ -68,11 +68,11 @@
                         <li><a class="nav-link scrollto" href="#team">Team</a></li>
                         <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                             <ul>
-                                <li><a href="#">Drop Down 1</a></li>
+                                <li><a href="./post_registration">ADD POST</a></li>
                                 <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
                                     <ul>
-                                        <li><a href="#">Deep Drop Down 1</a></li>
-                                        <li><a href="#">Deep Drop Down 2</a></li>
+                                        <li><a href="#"></a></li>
+                                        <li><a href="#"></a></li>
                                         <li><a href="#">Deep Drop Down 3</a></li>
                                         <li><a href="#">Deep Drop Down 4</a></li>
                                         <li><a href="#">Deep Drop Down 5</a></li>
@@ -449,8 +449,8 @@
         <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
         <script src="assets/vendor/php-email-form/validate.js"></script>
         <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="../../plugins/jquery/jquery.min.js"></script>
-        <script src="../../js/commenFunctions/functions.js"></script>
+        <script src="./plugins/jquery/jquery.min.js"></script>
+        <script src="./js/commenFunctions/functions.js"></script>
 <!--        <script src="../../plugins/select2/js/select2.js"></script>-->
 
         <!-- Template Main JS File -->
@@ -466,7 +466,7 @@
 
             function loadMakes() {
                 let option = '';
-                ajaxRequest("GET", "/api/get_makes", null, function (resp) {
+                ajaxRequest("GET", "./api/get_makes", null, function (resp) {
                     if (resp.length == 0) {
                         option += '<option value="">No Data</option>';
                     } else {
@@ -485,7 +485,7 @@
 
             function loadPostWithFiltering() {
                 let option = '';
-                let url = "/api/filtered_adds/";
+                let url = "./api/filtered_adds";
 
                 var form_obj = new Object();
                 form_obj.post_type = $('#cmb_post_type').val();
@@ -510,7 +510,7 @@
                                 option += "<div class='col-3'>";
                                 option += '<div class="card card-primary m-2">';
 //                                option += '<div class="portfolio-wrap">';
-                                option += "<img src='/storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
+                                option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
                                 option += '<div class="portfolio-info m-2 add-font">';
                                 if (row.post_title == null) {
                                     option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";
@@ -569,7 +569,7 @@
 
             function loadPostPage() {
                 let option = '';
-                let url = "/api/get_posts/";
+                let url = "./api/get_posts/";
                 try {
                     $.ajax({
                         type: "GET",
@@ -580,7 +580,7 @@
                                 option += "<div class='col-3'>";
                                 option += '<div class="card card-primary m-2">';
 //                                option += '<div class="portfolio-wrap">';
-                                option += "<img src='/storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
+                                option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
                                 option += '<div class="portfolio-info m-2 add-font">';
                                 if (row.post_title == null) {
                                     option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";

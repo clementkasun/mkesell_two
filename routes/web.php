@@ -19,15 +19,25 @@ use Illuminate\Support\Facades\Notification;
   |
  */
 
-Route::get('/', function () {
+Route::get('/logins', function () {
     return view('auth.login');
 });
+
+Route::get('/registers', function () {
+    return view('auth.register');
+});
+
 Route::get('/test', function () {
     return view('test');
 });
+
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 Route::get('/results/export', [JsonResultsController::class, 'index']);
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+Route::get('/', function () {
     return view('home');
 })->name('home');
 
@@ -126,4 +136,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/sms_report', function () 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/all_adds_view_two', function () {
     return view('/all_adds_view_two');
+});
+
+Route::get('/post_registration', function () {
+    return view('registration.post_registration');
 });
