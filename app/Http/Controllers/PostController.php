@@ -79,17 +79,17 @@ class PostController extends Controller {
             }
 
             $request->validate([
-                'main_image' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-                'image_one' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-                'image_two' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-                'image_three' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-                'image_four' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
-                'image_five' => 'mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+                'main_image' => 'required|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+//                'image_one' => 'nullable|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+//                'image_two' => 'nullable|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+//                'image_three' => 'nullable|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+//                'image_four' => 'nullable|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
+//                'image_five' => 'nullable|mimes:jpeg,bmp,png', // Only allow .jpg, .bmp and .png file types.
             ]);
             //get the post to update
             $image_path_update = Post::find($post_id);
             $random_name = uniqid($post_id);
-            if ($request->main_image != null) {
+            if ($request->main_image != 'undefined') {
                 $main_ext = $request->main_image->extension();
                 $path_main = $request->file('main_image')->storeAs(
                         '/public/post_images' . '/' . $post_id,
@@ -97,7 +97,7 @@ class PostController extends Controller {
                 );
                 $image_path_update->main_image = str_replace("public/", "/", $path_main);
             }
-            if ($request->image_one != null) {
+            if ($request->image_one != 'undefined') {
                 $img_one_ext = $request->image_one->extension();
                 $path_one = $request->file('image_one')->storeAs(
                         '/public/post_images' . '/' . $post_id,
@@ -105,7 +105,7 @@ class PostController extends Controller {
                 );
                 $image_path_update->image_1 = str_replace("public/", "/", $path_one);
             }
-            if ($request->image_two != null) {
+            if ($request->image_two != 'undefined') {
                 $img_two_ext = $request->image_two->extension();
                 $path_two = $request->file('image_two')->storeAs(
                         '/public/post_images' . '/' . $post_id,
@@ -113,7 +113,7 @@ class PostController extends Controller {
                 );
                 $image_path_update->image_2 = str_replace("public/", "/", $path_two);
             }
-            if ($request->image_three != null) {
+            if ($request->image_three != 'undefined') {
                 $img_three_ext = $request->image_three->extension();
                 $path_three = $request->file('image_three')->storeAs(
                         '/public/post_images' . '/' . $post_id,
@@ -121,7 +121,7 @@ class PostController extends Controller {
                 );
                 $image_path_update->image_3 = str_replace("public/", "/", $path_three);
             }
-            if ($request->image_four != null) {
+            if ($request->image_four != 'undefined') {
                 $img_four_ext = $request->image_four->extension();
                 $path_four = $request->file('image_four')->storeAs(
                         '/public/post_images' . '/' . $post_id,
@@ -129,7 +129,7 @@ class PostController extends Controller {
                 );
                 $image_path_update->image_4 = str_replace("public/", "/", $path_main);
             }
-            if ($request->image_five != null) {
+            if ($request->image_five != 'undefined') {
                 $img_five_ext = $request->image_five->extension();
                 $path_five = $request->file('image_five')->storeAs(
                         '/public/post_images' . '/' . $post_id,

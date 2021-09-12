@@ -143,7 +143,7 @@ class VehicleMakeSeeder extends Seeder {
             ['id' => 128, 'make_name' => 'Zongshen'],
             ['id' => 129, 'make_name' => 'Zotye'],
         ];
-        DB::table('vehicle_makes')->insert($vehicle_makes);
+        \DB::table('vehicle_makes')->insert($vehicle_makes);
     }
 
 }
