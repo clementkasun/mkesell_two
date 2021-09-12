@@ -546,7 +546,7 @@
                                     option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
                                 }
                                 option += '<div class="portfolio-links">';
-                                option += '<a href="/storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
+                                option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
                                 option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
                                 option += '</div>';
                                 option += '</div>';
@@ -616,7 +616,7 @@
                                     option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
                                 }
                                 option += '<div class="portfolio-links">';
-                                option += '<a href="/storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
+                                option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
                                 option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
                                 option += '</div>';
                                 option += '</div>';
