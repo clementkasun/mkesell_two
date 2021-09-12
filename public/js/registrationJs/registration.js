@@ -329,7 +329,7 @@ function save_cus_details() {
         if (result.status == 1) {
             Swal.fire(
                     'Graduate registration',
-                    'Successfully Updated!',
+                    'Successfully Saved!',
                     'success'
                     );
             location.reload();
