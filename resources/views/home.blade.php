@@ -600,7 +600,7 @@
                                 option += "<div class='col-12 col-md-3'>";
                                 option += '<div class="card card-primary m-2">';
 //                                option += '<div class="portfolio-wrap">';
-                                option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2 w-75' style='height: 8em;' alt='main_img'/><span>";
+                                option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
                                 option += '<div class="portfolio-info m-2 add-font">';
                                 if (row.post_title != null) {
                                     option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";
