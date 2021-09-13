@@ -397,7 +397,7 @@
                         <div class="section-title">
                             <h2>PROMOTING ADDS</h2>
                         </div>
-                        <ul class="form-control" id="promoted_adds">
+                        <ul id="promoted_adds">
 
 
                         </ul>
