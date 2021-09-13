@@ -6,6 +6,7 @@ use App\Models\Graduate;
 use App\Models\Notifications;
 use App\Models\Vacancy;
 use App\Notifications\VacancyNotification;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Notification;
 
 /*
@@ -27,9 +28,11 @@ Route::get('/register_customer', function () {
     return view('auth.CustomerRegister');
 });
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+//Route::get('/', function () {
+//    return view('home');
+//})->name('home');
+
+Route::get('/', [PostController::class, 'index']);
 
 //// auth
 //Route::get('/rolls', [App\Http\Controllers\RollController::class, 'index'])->name('system_Rolls');

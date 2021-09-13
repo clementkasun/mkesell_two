@@ -1,10 +1,9 @@
-@extends('layouts.head')
+<!--@extends('layouts.head')
 @extends('layouts.styles')
 @extends('layouts.scripts')
 @extends('layouts.navbar')
 @extends('layouts.footer')
-@section('pageStyles')
-
+@section('pageStyles')-->
 <!-- Select2 -->
 <link rel="stylesheet" href="./plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
@@ -16,8 +15,8 @@
 <link rel="stylesheet" href="./plugins/sweetalert2/sweetalert2.min.css">
 <!-- sweet alert -->
 <link rel="stylesheet" href="./plugins/custom-css/graduate_update.css">
-@endsection
-@section('content')
+<!--@endsection
+@section('content')-->
 
 <!-- Content Header (Page header) -->
 <section class=" content-header">

@@ -12,7 +12,45 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PostController extends Controller {
+    
+    
+    public function index(){
+        $post_all = Post::where('posts.deleted_at', '=', null)
+                        ->join('customers', 'posts.cust_id', 'customers.id')
+                        ->leftjoin('spare_parts', 'posts.spare_part_id', 'spare_parts.id')
+                        ->leftjoin('vehicles', 'posts.vehicle_id', 'vehicles.id')
+                        ->join('vehicle_makes', 'posts.make_id', 'vehicle_makes.id')
+                        ->select(
+                                'posts.id AS id',
+                                'posts.post_type',
+                                'posts.post_title',
+                                'posts.vehicle_id',
+                                'customers.id AS customer_id',
+                                'posts.main_image',
+                                'posts.condition',
+                                'vehicles.model',
+                                'posts.location',
+                                'vehicles.start_type',
+                                'vehicles.manufactured_year',
+                                'posts.price',
+                                'vehicles.on_going_lease',
+                                'vehicles.transmission',
+                                'vehicles.fuel_type',
+                                'vehicles.engine_capacity',
+                                'vehicles.millage',
+                                'vehicles.isAc',
+                                'vehicles.isPowerSteer',
+                                'vehicles.isPowerMirroring',
+                                'vehicles.isPowerWindow',
+                                'spare_parts.part_used_in',
+                                'spare_parts.part_category',
+                                'posts.additional_info',
+                                'posts.created_at'
+                        )->paginate(100);
 
+        return view('home', ['posts' => $post_all]);
+    }
+    
     /**
      * Store a newly created resource in storage.
      *

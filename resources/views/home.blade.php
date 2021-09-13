@@ -38,6 +38,14 @@
                 color: #003e80;
             }
 
+            .current {
+                color: green;
+            }
+
+            .w-5{
+                display: none;    
+            }
+
         </style>
     </head>
 
@@ -358,7 +366,7 @@
                         <div class="row m-2">
                             <div class="form-group col-lg-4">
                                 <label for=""><b>Year Range</b></label><br>
-                                <input type="text" id="year_min" class="yearpicker bg-white" value=""> <input type="text" id="year_max" class="yearpicker bg-white" value="">
+                                <input type="text" id="year_min" class="yearpicker" value=""> <input type="text" id="year_max" class="yearpicker" value="">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="cmb_gear"><b>Gear</b></label>
@@ -397,266 +405,276 @@
                         <div class="section-title">
                             <h2>PROMOTING ADDS</h2>
                         </div>
-                        <ul id="promoted_adds">
+                        <div id="promoted_adds">
+                            <div class="container">
+                                <div class="row">
+                                    @foreach ($posts as $post)
+                                    <!--                                <div class='row'>-->
+                                    <div class='col-12 col-md-3'>
+                                        <div class="card bg-light m-2">
+                                            <div class="card-header"><b><a hreff="{{$post->id}}">{{$post->post_title}}</a></b></div>
+                                            <div class="card-body bg-secondary">
+                                                <div class="portfolio-wrap text-center">
+                                                    <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/>
+                                                </div>
+                                            </div>
+                                            <div class="card-footer">
+                                                <span><b>Price: {{$post->price}}</b></span><br>
+                                                <span><b>Location: {{$post->location}}</b></span><br>
+                                                <span><b>Condition: {{$post->condition}}</b></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--                                </div>-->
+                                    @endforeach
+                                </div>
+                                <div class="text-center mt-5">{{ $posts->links() }}</div>
+                            </div>
+                            </section><!-- End Portfolio Section -->
+                            </main><!-- End #main -->
+                            <footer id="footer">
+                                <div class="container">
+                                    <h3>VEHICLEWORLD</h3>
+                                    <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+                                    <div class="social-links">
+                                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                    </div>
+                                    <div class="copyright">
+                                        &copy; Copyright <strong><span>Vehicleworld.com</span></strong>. All Rights Reserved
+                                    </div>
+                                    <div class="credits">
+                                        All the links in the footer should remain intact. 
+                                        You can delete the links only if you purchased the pro version. 
+                                        Licensing information: https://bootstrapmade.com/license/ 
+                                        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ 
+                                        Designed by <a href="https://bootstrapmade.com/">Clementechs</a>
+                                    </div>
+                                </div>
+                                <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+                            </footer> 
+                            <!--End Footer-->  
 
+                            <!-- Vendor JS Files -->
+                            <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+                            <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
+                            <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
+                            <script src="./assets/vendor/php-email-form/validate.js"></script>
+                            <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
+                            <script src="./plugins/jquery/jquery.min.js"></script>
+                            <script src="./js/commenFunctions/functions.js"></script>
+                            <script src="./plugins/yearpicker/yearpicker.js" async></script>
+                            <script src="./plugins/select2/js/select2.js"></script>
+                            <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
+                            <script src="./plugins/jqpaginator/jqpaginator.js"></script>
+                            <!-- UIkit JS -->
+                            <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
+                            <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
 
-                        </ul>
-                    </div>
-                </section><!-- End Portfolio Section -->
+                            <!-- Template Main JS File -->
+                            <script src="./assets/js/main.js"></script>
+                            <script>
+$(document).ready(function () {
+    loadMakes();
+    $('.yearpicker').yearpicker();
+});
 
-        </main><!-- End #main -->
+$('#search_adds').click(function () {
+    loadPostWithFiltering();
+});
 
-        <!--        <footer id="footer">
-                    <div class="container">
-                        <h3>VEHICLEWORLD</h3>
-                        <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
-                        <div class="social-links">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                        <div class="copyright">
-                            &copy; Copyright <strong><span>Vehicleworld.com</span></strong>. All Rights Reserved
-                        </div>
-                        <div class="credits">
-                            All the links in the footer should remain intact. 
-                            You can delete the links only if you purchased the pro version. 
-                            Licensing information: https://bootstrapmade.com/license/ 
-                            Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ 
-                            Designed by <a href="https://bootstrapmade.com/">Clementechs</a>
-                        </div>
-                    </div>
-                    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-                </footer>  End Footer  -->
-
-        <!-- Vendor JS Files -->
-        <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
-        <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-        <script src="./assets/vendor/php-email-form/validate.js"></script>
-        <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
-        <script src="./plugins/jquery/jquery.min.js"></script>
-        <script src="./js/commenFunctions/functions.js"></script>
-        <script src="./plugins/yearpicker/yearpicker.js" async></script>
-        <script src="./plugins/select2/js/select2.js"></script>
-        <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
-        <script src="./plugins/jqpaginator/jqpaginator.js"></script>
-        <!-- UIkit JS -->
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
-
-        <!-- Template Main JS File -->
-        <script src="./assets/js/main.js"></script>
-        <script>
-            $(document).ready(function () {
-                loadMakes();
-                loadPostPage();
-                $('.yearpicker').yearpicker();
+function loadMakes() {
+    let option = '';
+    ajaxRequest("GET", "./api/get_makes", null, function (resp) {
+        if (resp.length == 0) {
+            option += '<option value="">No Data</option>';
+        } else {
+            option = '<option value="">Select Make</option>';
+            $.each(resp, function (index, row) {
+                option += '<option value="' + row.id + '">' + row.make_name + '</option>';
             });
-            $('#search_adds').click(function () {
-                loadPostWithFiltering();
-            });
+        }
+        $('#cmb_make').html(option);
+        //                    $('#cmb_make').select2();
+        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+            callBack();
+        }
+    });
+}
 
-            $('[data-uk-pagination]').on('select.uk.pagination', function (e, pageIndex) {
-                alert('You have selected page: ' + (pageIndex + 1));
-            });
-            
-            function loadMakes() {
-                let option = '';
-                ajaxRequest("GET", "./api/get_makes", null, function (resp) {
-                    if (resp.length == 0) {
-                        option += '<option value="">No Data</option>';
-                    } else {
-                        option = '<option value="">Select Make</option>';
-                        $.each(resp, function (index, row) {
-                            option += '<option value="' + row.id + '">' + row.make_name + '</option>';
-                        });
+function loadPostWithFiltering() {
+    let url = "./api/filtered_adds";
+    var form_obj = new Object();
+    $min_year = $('#year_min').val();
+    $max_year = $('#year_max').val();
+    form_obj.post_type = $('#cmb_post_type').val();
+    form_obj.vehi_type = $('#cmb_vehi_type').val();
+    form_obj.location = $('#cmb_city').val();
+    form_obj.price_range = $('#cmb_price').val();
+    form_obj.condition = $('#cmb_condition').val();
+    form_obj.make = $('#cmb_make').val();
+    form_obj.model = $('#model').val();
+    form_obj.year_min = $min_year;
+    form_obj.year_max = $max_year;
+    form_obj.gear_type = $('#cmb_gear').val();
+    form_obj.fuel_type = $('#cmb_fuel_type').val();
+    if ($('#year_min').val() != '' && $('#year_max').val() != '') {
+        if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
+            Swal.fire('Post Registration', 'Year range is not correct!', 'error');
+        } else {
+            call_post_filter_api(url, form_obj);
+        }
+    } else {
+        call_post_filter_api(url, form_obj);
+    }
+}
+
+
+function call_post_filter_api(url, form_obj) {
+    let option = '';
+    try {
+        $.ajax({
+            type: "POST",
+            url: url,
+            dataSrc: "",
+            data: form_obj,
+            success: function (resp) {
+                option += "<div class='row'>";
+                $.each(resp, function (index, row) {
+                    option += "<div class='col-3 line-content'>";
+                    option += '<div class="card card-primary m-2">';
+                    //                                option += '<div class="portfolio-wrap">';
+                    option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
+                    option += '<div class="portfolio-info m-2 add-font">';
+                    if (row.post_title != null) {
+                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a></br>";
                     }
-                    $('#cmb_make').html(option);
-//                    $('#cmb_make').select2();
-                    if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-                        callBack();
+                    if (row.vehicle_condition != null) {
+                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
                     }
+                    if (row.model != null) {
+                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
+                    }
+                    if (row.manufactured_year != null) {
+                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
+                    }
+                    if (row.price != null) {
+                        option += "<span> <b>Price: " + row.price + "</span><br>";
+                    }
+                    if (row.engine_capacity != null) {
+                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
+                    }
+                    if (row.millage != null) {
+                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
+                    }
+                    if (row.part_condition != null) {
+                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
+                    }
+                    if (row.part_used_in != null) {
+                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
+                    }
+                    if (row.part_category != null) {
+                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
+                    }
+                    if (row.part_name_brand != null) {
+                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
+                    }
+                    option += '<div class="portfolio-links">';
+                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
+                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
+                    option += '</div>';
+                    option += '</div>';
+                    //                                option += '</div>';
+                    option += '</div>';
+                    option += '</div>';
                 });
+                option += "</div>";
+                $('#promoted_adds').html(option);
+                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+                    callBack();
+                }
             }
+        });
+    } catch (err) {
 
-            function loadPostWithFiltering() {
-                let url = "./api/filtered_adds";
-                var form_obj = new Object();
-                $min_year = $('#year_min').val();
-                $max_year = $('#year_max').val();
-                form_obj.post_type = $('#cmb_post_type').val();
-                form_obj.vehi_type = $('#cmb_vehi_type').val();
-                form_obj.location = $('#cmb_city').val();
-                form_obj.price_range = $('#cmb_price').val();
-                form_obj.condition = $('#cmb_condition').val();
-                form_obj.make = $('#cmb_make').val();
-                form_obj.model = $('#model').val();
-                form_obj.year_min = $min_year;
-                form_obj.year_max = $max_year;
-                form_obj.gear_type = $('#cmb_gear').val();
-                form_obj.fuel_type = $('#cmb_fuel_type').val();
-                if ($('#year_min').val() != '' && $('#year_max').val() != '') {
-                    if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
-                        Swal.fire('Post Registration', 'Year range is not correct!', 'error');
-                    } else {
-                        call_post_filter_api(url, form_obj);
+    }
+}
+
+function loadPostPage() {
+    let url = "./api/get_posts/";
+    let datas = call_form_unfiltered_api(url);
+}
+
+function call_form_unfiltered_api(url) {
+    let option = '';
+    try {
+        $.ajax({
+            type: "GET",
+            url: url,
+            success: function (resp) {
+                option += "<div class='row'>";
+                $.each(resp, function (index, row) {
+                    option += "<div class='col-12 col-md-3 line_content'>";
+                    option += '<div class="card card-primary m-2">';
+                    option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
+                    option += '<div class="portfolio-info m-2 add-font">';
+                    if (row.post_title != null) {
+                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
                     }
-                } else {
-                    call_post_filter_api(url, form_obj);
+                    if (row.vehicle_condition != null) {
+                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
+                    }
+                    if (row.model != null) {
+                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
+                    }
+                    if (row.manufactured_year != null) {
+                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
+                    }
+                    if (row.price != null) {
+                        option += "<span> <b>Price: " + row.price + "</span><br>";
+                    }
+                    if (row.engine_capacity != null) {
+                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
+                    }
+                    if (row.millage != null) {
+                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
+                    }
+                    if (row.part_condition != null) {
+                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
+                    }
+                    if (row.part_used_in != null) {
+                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
+                    }
+                    if (row.part_category != null) {
+                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
+                    }
+                    if (row.part_name_brand != null) {
+                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
+                    }
+                    option += '<div class="portfolio-links">';
+                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
+                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
+                    option += '</div>';
+                    option += '</div>';
+                    option += '</div>';
+                    option += '</div>';
+                });
+                option += "</div>";
+                $('#promoted_adds').html(option);
+                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+                    callBack();
                 }
             }
+        });
+    } catch (err) {
 
+    }
+}
 
-            function call_post_filter_api(url, form_obj) {
-                let option = '';
-                try {
-                    $.ajax({
-                        type: "POST",
-                        url: url,
-                        dataSrc: "",
-                        data: form_obj,
-                        success: function (resp) {
-                            option += "<div class='row'>";
-                            $.each(resp, function (index, row) {
-                                option += "<div class='col-3'>";
-                                option += '<div class="card card-primary m-2">';
-//                                option += '<div class="portfolio-wrap">';
-                                option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
-                                option += '<div class="portfolio-info m-2 add-font">';
-                                if (row.post_title != null) {
-                                    option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a></br>";
-                                }
-                                if (row.vehicle_condition != null) {
-                                    option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
-                                }
-                                if (row.model != null) {
-                                    option += "<span> <b>Model: " + row.model + "</b></span><br>";
-                                }
-                                if (row.manufactured_year != null) {
-                                    option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
-                                }
-                                if (row.price != null) {
-                                    option += "<span> <b>Price: " + row.price + "</span><br>";
-                                }
-                                if (row.engine_capacity != null) {
-                                    option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
-                                }
-                                if (row.millage != null) {
-                                    option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
-                                }
-                                if (row.part_condition != null) {
-                                    option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
-                                }
-                                if (row.part_used_in != null) {
-                                    option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
-                                }
-                                if (row.part_category != null) {
-                                    option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
-                                }
-                                if (row.part_name_brand != null) {
-                                    option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
-                                }
-                                option += '<div class="portfolio-links">';
-                                option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
-                                option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
-                                option += '</div>';
-                                option += '</div>';
-//                                option += '</div>';
-                                option += '</div>';
-                                option += '</div>';
-                            });
-                            option += "</div>";
-                            $('#promoted_adds').html(option);
-                            if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-                                callBack();
-                            }
-                        }
-                    });
-                } catch (err) {
+                            </script>
+                            </body>
 
-                }
-            }
-
-            function loadPostPage() {
-                let url = "./api/get_posts/";
-                let datas = call_form_unfiltered_api(url);
-                var itemsPerPage = 1;
-
-                console.log(datas);
-            }
-
-            function call_form_unfiltered_api(url) {
-                let option = '';
-                try {
-                    $.ajax({
-                        type: "GET",
-                        url: url,
-                        success: function (resp) {
-                            option += "<div class='row'>";
-                            $.each(resp, function (index, row) {
-                                option += "<div class='col-12 col-md-3'>";
-                                option += '<div class="card card-primary m-2">';
-//                                option += '<div class="portfolio-wrap">';
-                                option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
-                                option += '<div class="portfolio-info m-2 add-font">';
-                                if (row.post_title != null) {
-                                    option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
-                                }
-                                if (row.vehicle_condition != null) {
-                                    option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
-                                }
-                                if (row.model != null) {
-                                    option += "<span> <b>Model: " + row.model + "</b></span><br>";
-                                }
-                                if (row.manufactured_year != null) {
-                                    option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
-                                }
-                                if (row.price != null) {
-                                    option += "<span> <b>Price: " + row.price + "</span><br>";
-                                }
-                                if (row.engine_capacity != null) {
-                                    option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
-                                }
-                                if (row.millage != null) {
-                                    option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
-                                }
-                                if (row.part_condition != null) {
-                                    option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
-                                }
-                                if (row.part_used_in != null) {
-                                    option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
-                                }
-                                if (row.part_category != null) {
-                                    option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
-                                }
-                                if (row.part_name_brand != null) {
-                                    option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
-                                }
-                                option += '<div class="portfolio-links">';
-                                option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
-                                option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
-                                option += '</div>';
-                                option += '</div>';
-//                                option += '</div>';
-                                option += '</div>';
-                                option += '</div>';
-                            });
-                            option += "</div>";
-                            $('#promoted_adds').html(option);
-                            if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-                                callBack();
-                            }
-                        }
-                    });
-                } catch (err) {
-
-                }
-            }
-
-        </script>
-    </body>
-
-</html>
+                            </html>

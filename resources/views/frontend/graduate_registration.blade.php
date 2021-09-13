@@ -8,7 +8,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>GSMS | Registration</title>
+        <title>Customer Registration</title>
 
         <!-- Google Font: Source Sans Pro -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -211,7 +211,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="container">
                         <div class="row mb-2">
                             <div class="col-sm-12">
-                                <h1 class="m-0"><small>මානව සම්පත් අධිකාරිය - වයඹ පළාත / HUMAN RESOURCE DEPARTMENT - NWP</small></h1>
+                                <h1 class="m-0"><small>Customer Registration</small></h1>
                             </div><!-- /.col -->
                         </div><!-- /.row -->
                     </div><!-- /.container-fluid -->
@@ -223,7 +223,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                     <div class="container">
                         <div class="card card-primary verRegister">
                             <div class="card-header">
-                                <h3 class="card-title"> ලියාපදින්චි ෆෝරමය/Registration Form</h3>
+                                <h3 class="card-title">Registration Form</h3>
                             </div>
                             <!-- /.card-header -->
                             <!-- form start -->
@@ -232,29 +232,29 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label for="first_name">First Name*<small>(මුල් නම)</small></label>
+                                                <label for="first_name">First Name</label>
                                                 <div><input type="text" class="form-control" name="first_name" id="first_name" placeholder="First Name" required></div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="last_name">Last Name*<small>(අවසන් නම)</small></label>
+                                                <label for="last_name">Last Name</label>
                                                 <div><input type="text" class="form-control" name="last_name" id="last_name" placeholder="Last Name" required></div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="address">Address*<small>(ලිපිනය)</small></label>
+                                                <label for="address">Address</label>
                                                 <div><input type="text" class="form-control" name="address" id="address" placeholder="Address" required></div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="telephone">Mobile No *<small>(ජංගම දූරකථන අංකය)</small></label>
+                                                <label for="telephone">Mobile No</label>
                                                 <div><input type="text" class="form-control" name="tel" id="Telephone" minlength="10" maxlength="10" placeholder="0712233456" required></div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="email">Email<small>(විද්‍යුත් තැපෑල)*</small></label>
+                                                <label for="email">Email</label>
                                                 <div><input type="email" class="form-control" name="email" id="email" placeholder="example@gmail.com" required></div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="gender">Gender*<small>(ස්ත්‍රී පුරුෂ භාවය)</small></label>
+                                                        <label for="gender">Gender*</label>
                                                         <div class="form-check">
                                                             <input class="form-check-input" type="radio" value="male" name="gender" checked="true">
                                                             <label class="form-check-label">Male</label>
@@ -267,7 +267,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label for="civil_status">Civil Status*<small>(සිවිල් තත්වය)</small></label>
+                                                        <label for="civil_status">Civil Status*</label>
                                                         <div class="form-check">
                                                             <input class="form-check-input" value="single" type="radio" name="civil_status" required checked="true">
                                                             <label class="form-check-label">Single</label>
