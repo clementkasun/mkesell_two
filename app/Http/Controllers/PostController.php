@@ -254,7 +254,7 @@ class PostController extends Controller {
             });
             
             $post = $post->when($vehi_type != '', function ($p) use($vehi_type) {
-                return $p->where('vehicles.vehicle_tyoe', $vehi_type);
+                return $p->where('vehicles.vehicle_type', $vehi_type);
             });
 
             $post = $post->when($price_range != null && $price_range != 'Any', function($p) use($price_range) {
