@@ -27,7 +27,8 @@
         <link href="./plugins/select2/css/select2.css" rel="stylesheet">
         <link href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" >
         <link href="./plugins/jqpaginator/jqpaginator.css" rel="stylesheet">
-
+        <!-- UIkit CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <!-- Template Main CSS File -->
         <link href="./assets/css/style.css" rel="stylesheet">
         <style>
@@ -396,10 +397,10 @@
                         <div class="section-title">
                             <h2>PROMOTING ADDS</h2>
                         </div>
-                        <div class="portfolio-container" id="promoted_adds">
+                        <ul class="form-control" id="promoted_adds">
 
 
-                        </div>
+                        </ul>
                     </div>
                 </section><!-- End Portfolio Section -->
 
@@ -442,6 +443,9 @@
         <script src="./plugins/select2/js/select2.js"></script>
         <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
         <script src="./plugins/jqpaginator/jqpaginator.js"></script>
+        <!-- UIkit JS -->
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
 
         <!-- Template Main JS File -->
         <script src="./assets/js/main.js"></script>
@@ -454,6 +458,11 @@
             $('#search_adds').click(function () {
                 loadPostWithFiltering();
             });
+
+            $('[data-uk-pagination]').on('select.uk.pagination', function (e, pageIndex) {
+                alert('You have selected page: ' + (pageIndex + 1));
+            });
+            
             function loadMakes() {
                 let option = '';
                 ajaxRequest("GET", "./api/get_makes", null, function (resp) {
@@ -588,7 +597,7 @@
                         success: function (resp) {
                             option += "<div class='row'>";
                             $.each(resp, function (index, row) {
-                                option += "<div class='col-3'>";
+                                option += "<div class='col-12 col-md-3'>";
                                 option += '<div class="card card-primary m-2">';
 //                                option += '<div class="portfolio-wrap">';
                                 option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
