@@ -603,7 +603,7 @@
                                 option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
                                 option += '<div class="portfolio-info m-2 add-font">';
                                 if (row.post_title != null) {
-                                    option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a>";
+                                    option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
                                 }
                                 if (row.vehicle_condition != null) {
                                     option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
