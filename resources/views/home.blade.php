@@ -358,7 +358,7 @@
                         <div class="row m-2">
                             <div class="form-group col-lg-4">
                                 <label for=""><b>Year Range</b></label><br>
-                                <input type="text" id="year_min" class="yearpicker" value=""> <input type="text" id="year_max" class="yearpicker" value="">
+                                <input type="text" id="year_min" class="yearpicker bg-white" value=""> <input type="text" id="year_max" class="yearpicker bg-white" value="">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="cmb_gear"><b>Gear</b></label>
