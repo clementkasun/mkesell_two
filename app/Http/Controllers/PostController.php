@@ -90,7 +90,7 @@ class PostController extends Controller {
                                 'posts.image_5',
                         )->first();
 
-        return view('post_profile', ['post_data' => $post_data]);
+        return view('./post_profile', ['post_data' => $post_data]);
     }
 
     /**
