@@ -230,7 +230,7 @@
                                         <div class="col-md-6">
                                             <label>Image One</label></br>
                                             @if($post_data->image_1 != null)
-                                            <img id="image_one" name="image_one" src="{{asset('/storage/'.$post_data->image_1')}}" alt="image one" width="100%" height="90%" style="border-radius: 15px" />
+                                            <img id="image_one" name="image_one" src="{{asset(/storage/.'$post_data->image_1')}}" alt="image one" width="100%" height="90%" style="border-radius: 15px" />
                                             @endif
                                             @if($post_data->image_1 == null)
                                             <img id="image_one" name="image_one" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image One" width="100%" height="90%" style="border-radius: 15px" />
@@ -239,7 +239,7 @@
                                         <div class="col-md-6">
                                             <label>Image Two</label></br>
                                             @if($post_data->image_2 != null)
-                                            <img id="image_two" name="image_two" src="{{asset('/storage/'.$post_data->image_2')}}" alt="image two" width="100%" height="90%" style="border-radius: 15px" />
+                                            <img id="image_two" name="image_two" src="{{asset(/storage/.'$post_data->image_2')}}" alt="image two" width="100%" height="90%" style="border-radius: 15px" />
                                             @endif
                                             @if($post_data->image_2 == null)
                                             <img id="image_two" name="image_two" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" NIC image" width="100%" height="90%" style="border-radius: 15px" />
@@ -250,7 +250,7 @@
                                         <div class="col-md-6 mt-1">
                                             <label>Image Three</label></br>
                                             @if($post_data->image_3 != null)
-                                            <img id="image_three" name="image_three" src="{{asset('/storage/'.$post_data->image_3')}}" alt="image_three" width="100%" height="90%" style="border-radius: 15px" />
+                                            <img id="image_three" name="image_three" src="{{asset(/storage/.'$post_data->image_3')}}" alt="image_three" width="100%" height="90%" style="border-radius: 15px" />
                                             @endif
                                             @if($post_data->image_3 == null)
                                             <img id="image_three" name="image_three" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
@@ -259,7 +259,7 @@
                                         <div class="col-md-6 mt-1">
                                             <label>Image Four</label></br>
                                             @if($post_data->image_4 != null)
-                                            <img id="image_three" name="image_three" src="{{asset('/storage/'.$post_data->image_4')}}" alt="image_four" width="100%" height="90%" style="border-radius: 15px" />
+                                            <img id="image_three" name="image_three" src="{{asset(/storage/.'$post_data->image_4')}}" alt="image_four" width="100%" height="90%" style="border-radius: 15px" />
                                             @endif
                                             @if($post_data->image_4 == null)
                                             <img id="image_three" name="image_three" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
@@ -270,7 +270,7 @@
                                         <div class="col-md-6 mt-1">
                                             <label>Image Five</label></br>
                                             @if($post_data->image_5 != null)
-                                            <img id="image_five" name="image_five" src="{{asset('/storage/'.$post_data->image_5')}}" alt="image_five" width="100%" height="90%" style="border-radius: 15px" />
+                                            <img id="image_five" name="image_five" src="{{asset(/storage/.'$post_data->image_5')}}" alt="image_five" width="100%" height="90%" style="border-radius: 15px" />
                                             @endif
                                             @if($post_data->image_5 == null)
                                             <img id="image_five" name="image_five" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
