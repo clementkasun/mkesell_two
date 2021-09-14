@@ -10,11 +10,11 @@
 <!-- daterange picker -->
 <link rel="stylesheet" href="{{asset("/plugins/daterangepicker/daterangepicker.css")}}">
 <!-- iCheck for checkboxes and radio inputs -->
-<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}">
 <!-- Bootstrap Color Picker -->
-<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}/plugins/bootstrap-colorpicker/css/bootstrap-colorpicker.min.css">
+<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}">
 <!-- Tempusdominus Bbootstrap 4 -->
-<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+<link rel="stylesheet" href="{{asset("/plugins/fontawesome-free/css/all.min.css")}}">
 <!-- Select2 -->
 
 
