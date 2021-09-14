@@ -48,7 +48,7 @@
                             <div class="col-md-12">
                                 <div class="text-center">
                                     @if($post_data->main_image != null)
-                                    <img class="profile-user-img circle-img img-fluid img-circle" src="{{'./storage/'.$post_data->main_image}}" alt="post main picture" style="width:10em; height:10em; max-width: 100%; max-height: 100%;" />
+                                    <img class="profile-user-img circle-img img-fluid img-circle" src="{{'./public/storage/'.$post_data->main_image}}" alt="post main picture" style="width:10em; height:10em; max-width: 100%; max-height: 100%;" />
                                     @endif
 
                                     @if($post_data->main_image == null)
