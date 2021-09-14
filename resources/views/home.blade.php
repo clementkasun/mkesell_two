@@ -409,23 +409,23 @@
                             <div class="container">
                                 <div class="row">
                                     @foreach ($posts as $post)
-                                    <!--                                <div class='row'>-->
                                     <div class='col-12 col-md-3'>
                                         <div class="card bg-light m-2">
-                                            <div class="card-header"><b><a hreff="{{$post->id}}">{{$post->post_title}}</a></b></div>
-                                            <div class="card-body bg-secondary">
+                                            <div class="card-header">
+                                                <b><a href="/api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                            </div>
+                                            <div class="card-body bg-dark">
                                                 <div class="portfolio-wrap text-center">
-                                                    <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/>
+                                                    <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 10em; width: 98%' alt='main_img'/>
                                                 </div>
                                             </div>
                                             <div class="card-footer">
-                                                <span><b>Price: {{$post->price}}</b></span><br>
-                                                <span><b>Location: {{$post->location}}</b></span><br>
-                                                <span><b>Condition: {{$post->condition}}</b></span>
+                                                <span>Price: {{$post->price}}</span><br>
+                                                <span>Location: {{$post->location}}</span><br>
+                                                <span>Condition: {{$post->condition}}</span>
                                             </div>
                                         </div>
                                     </div>
-                                    <!--                                </div>-->
                                     @endforeach
                                 </div>
                                 <div class="text-center mt-5">{{ $posts->links() }}</div>
@@ -437,11 +437,11 @@
                                     <h3>VEHICLEWORLD</h3>
                                     <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
                                     <div class="social-links">
-                                        <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                                        <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                                        <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                                        <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                                        <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                                        <a href="https://twitter.com" class="twitter"><i class="bx bxl-twitter"></i></a>
+                                        <a href="https://www.facebook.com/kasunclement/" class="facebook"><i class="bx bxl-facebook"></i></a>
+                                        <a href="https://www.instergram.com" class="instagram"><i class="bx bxl-instagram"></i></a>
+                                        <a href="https://google-plus.com" class="google-plus"><i class="bx bxl-skype"></i></a>
+                                        <a href="https://www.linkedin.com" class="linkedin"><i class="bx bxl-linkedin"></i></a>
                                     </div>
                                     <div class="copyright">
                                         &copy; Copyright <strong><span>Vehicleworld.com</span></strong>. All Rights Reserved

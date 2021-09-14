@@ -33,6 +33,11 @@ Route::get('/register_customer', function () {
 //})->name('home');
 
 Route::get('/', [PostController::class, 'index']);
+Route::get('/dashboard', [PostController::class, 'index']);
+
+Route::get('/post_profile', function () {
+    return view('post_profile');
+});
 
 //// auth
 //Route::get('/rolls', [App\Http\Controllers\RollController::class, 'index'])->name('system_Rolls');
@@ -40,7 +45,7 @@ Route::get('/', [PostController::class, 'index']);
 //Route::get('/users/id/{id}', [App\Http\Controllers\UserController::class, 'edit']);
 ////Route::get('/test', function () {
 ////    return view('auth.testlogin');//});
-//Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout']); # post
+Route::get('/logout', [App\Http\Controllers\UserController::class, 'logout']); # post
 //Route::post('/users', [App\Http\Controllers\UserController::class, 'create'])->name('system_Rolls');
 //Route::post('/rolls', [App\Http\Controllers\RollController::class, 'create'])->name('create_system_Rolls');
 //

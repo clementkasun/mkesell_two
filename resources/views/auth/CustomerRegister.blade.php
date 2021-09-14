@@ -1,35 +1,30 @@
-<!--@extends('layouts.head')
+@extends('layouts.admin')
 @extends('layouts.styles')
 @extends('layouts.scripts')
 @extends('layouts.navbar')
 @extends('layouts.footer')
-@section('pageStyles')-->
+
+@section('pageStyles')
 <!-- Select2 -->
 <link rel="stylesheet" href="./plugins/select2/css/select2.min.css">
 <link rel="stylesheet" href="./plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
 <!-- Bootstrap4 Duallistbox -->
 <link rel="stylesheet" href="./plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="./dist/css/adminlte.min.css">
+<!--<link rel="stylesheet" href="./dist/css/adminlte.min.css">-->
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="./plugins/sweetalert2/sweetalert2.min.css">
 <!-- sweet alert -->
 <link rel="stylesheet" href="./plugins/custom-css/graduate_update.css">
-<!--@endsection
-@section('content')-->
+@endsection
 
+@section('content')
 <!-- Content Header (Page header) -->
 <section class=" content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-10">
-                <h1> Graduate Update</h1>
-            </div>
-            <div class="col-sm-2">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                    <li class="breadcrumb-item active">Registration</li>
-                </ol>
+            <div class="col-sm-12 text-center">
+                <h1> <b class="text-primary">Customer Registration</b> </h1>
             </div>
         </div>
     </div>
@@ -38,14 +33,14 @@
 
 <!-- Main content -->
 <section class="content">
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <!-- left column -->
             <div class="col-md-12">
                 <!-- general form elements -->
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h3 class="card-title">Customer Registration</h3>
+                        <h1 class="card-title"><b>Customer Registration</b></h1>
                     </div>
                     <!-- /.card-header -->
                     <!-- form start -->
@@ -85,7 +80,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                     <div class="form-group">
+                                    <div class="form-group">
                                         <label for="location">Location*</label>
                                         <div class="input-group">
                                             <div class="custom-file">
@@ -107,6 +102,14 @@
                                             <div class="custom-file">
                                                 <input type="password" class="form-control" name="password_confirm" id="password_confirm" value="" placeholder="CONFIRM PASSWORD" required>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="bg-secondary text-center p-5" style="width: 100%; height: 100%; border-radius: 15px">
+                                        <div class="bg-light" style="width: 95%; height: 60%">
+                                            <img src="./storage/System/avater.png" style="width: 95%; height: 80%"/><br>
+                                            <div><h1><b>VEHICLEWORLD.COM</b></h1></div>
                                         </div>
                                     </div>
                                 </div>
@@ -185,38 +188,52 @@
                 });
 
                 $("#save_customer").click(function () {
-                    if ($('#password_origin').val() == '' || $('#password_confirm').val() == '') {
-                        $('#password_origin').addClass('has-error');
-                        $('#password_confirm').addClass('has-error');
-                        Swal.fire("Failed!", "Password fields is required to register!", "warning");
-                        return false;
-                    }
-                    if ($('#password_origin').val() != $('#password_confirm').val()) {
-                        $('#password_origin').addClass('has-error');
-                        $('#password_confirm').addClass('has-error');
-                        Swal.fire("Failed!", "Confirm password is need to same as password!", "warning");
-                        return false;
-                    } else {
-                        $('#password_origin').removeClass('has-error');
-                        $('#password_confirm').removeClass('has-error');
-                        var is_valid = jQuery("#customer_registration").valid();
-                        if (is_valid) {
-                            Swal.fire({
-                                title: 'Are you sure?',
-                                text: "Record will be Saved",
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: 'Yes!'
-                            }).then((result) => {
-                                if (result.value) {
-                                    save_cus_details();
-                                }
-                            });
+                    var data = {
+                        email: $('#email').val(),
+                        nic: $('#nic').val()
+                    };
+                    let url_email_nic = "/api/is_email_nic_exist";
+
+                    ajaxRequest("POST", url_email_nic, data, function (resp) {
+                        if (resp == 1) {
+                            $('#email').addClass('has-error');
+                            $('#nic').addClass('has-error');
+                            Swal.fire("Failed!", "Email or NIC already exist!", "warning");
                         } else {
-                            Swal.fire("Failed!", "Invalid data found!", "warning");
+                            $('#email').removeClass('has-error');
+                            $('#nic').removeClass('has-error');
+                            if ($('#password_origin').val() == '' || $('#password_confirm').val() == '') {
+                                $('#password_origin').addClass('has-error');
+                                $('#password_confirm').addClass('has-error');
+                                Swal.fire("Failed!", "Password fields is required to register!", "warning");
+                            }
+                            if ($('#password_origin').val() != $('#password_confirm').val()) {
+                                $('#password_origin').addClass('has-error');
+                                $('#password_confirm').addClass('has-error');
+                                Swal.fire("Failed!", "Confirm password is need to same as password!", "warning");
+                            } else {
+                                $('#password_origin').removeClass('has-error');
+                                $('#password_confirm').removeClass('has-error');
+                                var is_valid = jQuery("#customer_registration").valid();
+                                if (is_valid) {
+                                    Swal.fire({
+                                        title: 'Are you sure?',
+                                        text: "Record will be Saved",
+                                        showCancelButton: true,
+                                        confirmButtonColor: '#3085d6',
+                                        cancelButtonColor: '#d33',
+                                        confirmButtonText: 'Yes!'
+                                    }).then((result) => {
+                                        if (result.value) {
+                                            save_cus_details();
+                                        }
+                                    });
+                                } else {
+                                    Swal.fire("Failed!", "Invalid data found!", "warning");
+                                }
+                            }
                         }
-                    }
+                    });
                 });
 
                 jQuery.validator.setDefaults({

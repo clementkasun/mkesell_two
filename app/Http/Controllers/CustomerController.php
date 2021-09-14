@@ -15,7 +15,7 @@ class CustomerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view(registration.customer_reg);
+        return view(registration . customer_reg);
     }
 
     /**
@@ -53,8 +53,8 @@ class CustomerController extends Controller {
 
                 $first_name = request('firstName');
                 $last_name = request('lastName');
-                $cust_name =  $first_name." ".$last_name;
-                
+                $cust_name = $first_name . " " . $last_name;
+
                 Customer::create([
                     'cust_name' => $cust_name,
                     'phone_number' => request('contactNo'),
@@ -166,4 +166,19 @@ class CustomerController extends Controller {
         }
     }
 
+    public function email_nic_exist(Request $request) {
+        $email = $request->email;
+        $nic = $request->nic;
+        $cust_nic = User::where('nic', '=', $nic)->first();
+        $user_email = User::where('email', '=', $email)->first();
+        $cust_email = Customer::where('email', '=', $email)->first();
+
+        if (is_null($cust_nic) && is_null($user_email) && is_null($cust_email)) {
+            return 0;
+        } 
+        
+        if(!is_null($cust_nic) || !is_null($user_email) || !is_null($cust_email)){
+            return 1;
+        }
+    }
 }

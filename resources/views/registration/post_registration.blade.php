@@ -11,7 +11,7 @@
 <!-- Bootstrap4 Duallistbox -->
 <link rel="stylesheet" href="./plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css">
 <!-- Theme style -->
-<link rel="stylesheet" href="./dist/css/adminlte.min.css">
+<!--<link rel="stylesheet" href="./dist/css/adminlte.min.css">-->
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="./plugins/sweetalert2/sweetalert2.min.css">
 <!-- sweet alert -->
@@ -81,7 +81,7 @@
                                     <div class="form-group">
                                         <label for="post_type">Post Type</label>                                    
                                         <div>
-                                            <select class="custom-select" id="post_type" name="post_type" required>
+                                            <select class="custom-select w-100" id="post_type" name="post_type" required>
                                                 <option value="">Not Selected</option>
                                                 <option value="VEHICLE">Vehicle</option>
                                                 <option value="SPARE PART">Spare Part</option>
@@ -98,7 +98,7 @@
                                     <div class="form-group">
                                         <label for="vehicle_type">Vehicle type</label>
                                         <div>
-                                            <select id="vehicle_type" name="vehicle_type" class="form-control">
+                                            <select id="vehicle_type" name="vehicle_type" class="custom-select w-100">
                                                 <option value="All">All</option>
                                                 <option value="Car">Car</option>
                                                 <option value="Van">Van</option
@@ -119,7 +119,7 @@
                                     <div class="form-group">
                                         <label for="condition">Condition</label>                                    
                                         <div>
-                                            <select class="custom-select" id="condition" name="condition" required>
+                                            <select class="custom-select w-100" id="condition" name="condition" required>
                                                 <option value="">Not Selected</option>
                                                 <option value="Used">Used</option>
                                                 <option value="New">Brand New</option>
@@ -129,7 +129,7 @@
                                     <div class="form-group">
                                         <label for="make_id">Make</label>                                    
                                         <div>
-                                            <select class="custom-select" id="make_id" name="make_id" required>
+                                            <select class="custom-select w-100" id="make_id" name="make_id" required>
                                             </select>
                                         </div>
                                     </div>
@@ -211,7 +211,7 @@
                                     <div class="form-group">
                                         <label for="fuel_type">Fuel Type</label>
                                         <div>
-                                            <select name="fuel_type" id="fuel_type" class="custom-select" required>
+                                            <select name="fuel_type" id="fuel_type" class="custom-select w-100" required>
                                                 <option value="">Select Fuel Type</option>
                                                 <option value="Diesel">Diesel</option>
                                                 <option value="Petrol">Petrol</option>
@@ -240,8 +240,8 @@
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="isPowerSteer">Power Steer</label><br>
-                                            <div class="form-check">
-                                                <input type="checkbox" name="isPowerSteer" id="isPowerSteer" class ="ml-0 pl-0" required>
+                                            <div>
+                                                <input type="checkbox" name="isPowerSteer" id="isPowerSteer" required>
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3">
@@ -270,7 +270,7 @@
                                     <div class="form-group">
                                         <label for="part_category">Part Category</label>
                                         <div>
-                                            <select id="part_category" name="part_category" class="form-control">
+                                            <select id="part_category" name="part_category" class="form-control w-100">
                                                 <option value="">Select</option>
                                                 <option value="Air Conditioning &amp; Heating">Air Conditioning &amp; Heating</option>
                                                 <option value="Air Intake &amp; Fuel Delivery">Air Intake &amp; Fuel Delivery</option>
