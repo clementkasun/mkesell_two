@@ -412,7 +412,7 @@
                                     <div class='col-12 col-md-3'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="/api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="./api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body bg-dark">
                                                 <div class="portfolio-wrap text-center">
