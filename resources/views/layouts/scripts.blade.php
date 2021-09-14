@@ -23,5 +23,5 @@
 <script src="{{asset("/dist/js/demo.js")}}"></script>
 
 <!--commen functions-->
-<script src="{{asset("/js/commenFunctions\functions.js")}}" type="text/javascript"></script>
+<script src="{{asset("/js/commenFunctions/functions.js")}}" type="text/javascript"></script>
 @endsection
