@@ -9,6 +9,7 @@ use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 
 class PostController extends Controller {
@@ -276,6 +277,7 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function filtered_adds(Request $request) {
+        
         $post_type = $request->post_type;
         $vehi_type = $request->vehi_type;
         $location = $request->location;
@@ -378,8 +380,8 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_data = $post->get();
-            return $filtered_data;
+            $filtered_data = $post->paginate(100);;
+            return Redirect::route('home', ['posts' => $filtered_data]);
         }
 
         if ($post_type == "SPARE") {

@@ -409,20 +409,27 @@
                             <div class="container">
                                 <div class="row">
                                     @foreach ($posts as $post)
-                                    <div class='col-12 col-md-3'>
+                                    <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
                                                 <b><a href="./api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
-                                            <div class="card-body bg-dark">
-                                                <div class="portfolio-wrap text-center">
-                                                    <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 10em; width: 98%' alt='main_img'/>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-5">
+                                                        <div class="portfolio-wrap text-center">
+                                                            <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 10em; width: 90%' alt='main_img'/>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-7">
+                                                        <span><b>Price:</b>  {{$post->price}} </span><br>
+                                                        <span><b>Location:</b>  {{$post->location}} </span><br>
+                                                        <span><b>Condition:</b>  {{$post->condition}} </span>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="card-footer">
-                                                <span>Price: {{$post->price}}</span><br>
-                                                <span>Location: {{$post->location}}</span><br>
-                                                <span>Condition: {{$post->condition}}</span>
+
                                             </div>
                                         </div>
                                     </div>
@@ -521,6 +528,7 @@ function loadPostWithFiltering() {
     form_obj.year_max = $max_year;
     form_obj.gear_type = $('#cmb_gear').val();
     form_obj.fuel_type = $('#cmb_fuel_type').val();
+    console.log(form_obj);
     if ($('#year_min').val() != '' && $('#year_max').val() != '') {
         if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
             Swal.fire('Post Registration', 'Year range is not correct!', 'error');
@@ -534,7 +542,6 @@ function loadPostWithFiltering() {
 
 
 function call_post_filter_api(url, form_obj) {
-    let option = '';
     try {
         $.ajax({
             type: "POST",
@@ -542,57 +549,6 @@ function call_post_filter_api(url, form_obj) {
             dataSrc: "",
             data: form_obj,
             success: function (resp) {
-                option += "<div class='row'>";
-                $.each(resp, function (index, row) {
-                    option += "<div class='col-3 line-content'>";
-                    option += '<div class="card card-primary m-2">';
-                    //                                option += '<div class="portfolio-wrap">';
-                    option += "<img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; 8em' alt='main_img'/>";
-                    option += '<div class="portfolio-info m-2 add-font">';
-                    if (row.post_title != null) {
-                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a></br>";
-                    }
-                    if (row.vehicle_condition != null) {
-                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
-                    }
-                    if (row.model != null) {
-                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
-                    }
-                    if (row.manufactured_year != null) {
-                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
-                    }
-                    if (row.price != null) {
-                        option += "<span> <b>Price: " + row.price + "</span><br>";
-                    }
-                    if (row.engine_capacity != null) {
-                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
-                    }
-                    if (row.millage != null) {
-                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
-                    }
-                    if (row.part_condition != null) {
-                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
-                    }
-                    if (row.part_used_in != null) {
-                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
-                    }
-                    if (row.part_category != null) {
-                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
-                    }
-                    if (row.part_name_brand != null) {
-                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
-                    }
-                    option += '<div class="portfolio-links">';
-                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
-                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
-                    option += '</div>';
-                    option += '</div>';
-                    //                                option += '</div>';
-                    option += '</div>';
-                    option += '</div>';
-                });
-                option += "</div>";
-                $('#promoted_adds').html(option);
                 if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
                     callBack();
                 }
@@ -603,76 +559,76 @@ function call_post_filter_api(url, form_obj) {
     }
 }
 
-function loadPostPage() {
-    let url = "./api/get_posts/";
-    let datas = call_form_unfiltered_api(url);
-}
-
-function call_form_unfiltered_api(url) {
-    let option = '';
-    try {
-        $.ajax({
-            type: "GET",
-            url: url,
-            success: function (resp) {
-                option += "<div class='row'>";
-                $.each(resp, function (index, row) {
-                    option += "<div class='col-12 col-md-3 line_content'>";
-                    option += '<div class="card card-primary m-2">';
-                    option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
-                    option += '<div class="portfolio-info m-2 add-font">';
-                    if (row.post_title != null) {
-                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
-                    }
-                    if (row.vehicle_condition != null) {
-                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
-                    }
-                    if (row.model != null) {
-                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
-                    }
-                    if (row.manufactured_year != null) {
-                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
-                    }
-                    if (row.price != null) {
-                        option += "<span> <b>Price: " + row.price + "</span><br>";
-                    }
-                    if (row.engine_capacity != null) {
-                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
-                    }
-                    if (row.millage != null) {
-                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
-                    }
-                    if (row.part_condition != null) {
-                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
-                    }
-                    if (row.part_used_in != null) {
-                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
-                    }
-                    if (row.part_category != null) {
-                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
-                    }
-                    if (row.part_name_brand != null) {
-                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
-                    }
-                    option += '<div class="portfolio-links">';
-                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
-                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
-                    option += '</div>';
-                    option += '</div>';
-                    option += '</div>';
-                    option += '</div>';
-                });
-                option += "</div>";
-                $('#promoted_adds').html(option);
-                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-                    callBack();
-                }
-            }
-        });
-    } catch (err) {
-
-    }
-}
+//function loadPostPage() {
+//    let url = "./api/get_posts/";
+//    let datas = call_form_unfiltered_api(url);
+//}
+//
+//function call_form_unfiltered_api(url) {
+//    let option = '';
+//    try {
+//        $.ajax({
+//            type: "GET",
+//            url: url,
+//            success: function (resp) {
+//                option += "<div class='row'>";
+//                $.each(resp, function (index, row) {
+//                    option += "<div class='col-12 col-md-3 line_content'>";
+//                    option += '<div class="card card-primary m-2">';
+//                    option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
+//                    option += '<div class="portfolio-info m-2 add-font">';
+//                    if (row.post_title != null) {
+//                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
+//                    }
+//                    if (row.vehicle_condition != null) {
+//                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
+//                    }
+//                    if (row.model != null) {
+//                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
+//                    }
+//                    if (row.manufactured_year != null) {
+//                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
+//                    }
+//                    if (row.price != null) {
+//                        option += "<span> <b>Price: " + row.price + "</span><br>";
+//                    }
+//                    if (row.engine_capacity != null) {
+//                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
+//                    }
+//                    if (row.millage != null) {
+//                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
+//                    }
+//                    if (row.part_condition != null) {
+//                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
+//                    }
+//                    if (row.part_used_in != null) {
+//                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
+//                    }
+//                    if (row.part_category != null) {
+//                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
+//                    }
+//                    if (row.part_name_brand != null) {
+//                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
+//                    }
+//                    option += '<div class="portfolio-links">';
+//                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
+//                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
+//                    option += '</div>';
+//                    option += '</div>';
+//                    option += '</div>';
+//                    option += '</div>';
+//                });
+//                option += "</div>";
+//                $('#promoted_adds').html(option);
+//                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+//                    callBack();
+//                }
+//            }
+//        });
+//    } catch (err) {
+//
+//    }
+//}
 
                             </script>
                             </body>
