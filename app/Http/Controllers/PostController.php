@@ -46,7 +46,7 @@ class PostController extends Controller {
                                 'spare_parts.part_category',
                                 'posts.additional_info',
                                 'posts.created_at'
-                        )->paginate(100);
+                        )->paginate(5);
 
         return view('home', ['posts' => $post_all]);
     }
