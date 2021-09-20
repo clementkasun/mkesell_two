@@ -488,9 +488,9 @@ $(document).ready(function () {
     $('.yearpicker').yearpicker();
 });
 
-$('#search_adds').click(function () {
-    loadPostWithFiltering();
-});
+//$('#search_adds').click(function () {
+//    loadPostWithFiltering();
+//});
 
 function loadMakes() {
     let option = '';
@@ -511,52 +511,52 @@ function loadMakes() {
     });
 }
 
-function loadPostWithFiltering() {
-    let url = "./api/filtered_posts";
-    var form_obj = new Object();
-    $min_year = $('#year_min').val();
-    $max_year = $('#year_max').val();
-    form_obj.post_type = $('#cmb_post_type').val();
-    form_obj.vehi_type = $('#cmb_vehi_type').val();
-    form_obj.location = $('#cmb_city').val();
-    form_obj.price_range = $('#cmb_price').val();
-    form_obj.condition = $('#cmb_condition').val();
-    form_obj.make = $('#cmb_make').val();
-    form_obj.model = $('#model').val();
-    form_obj.year_min = $min_year;
-    form_obj.year_max = $max_year;
-    form_obj.gear_type = $('#cmb_gear').val();
-    form_obj.fuel_type = $('#cmb_fuel_type').val();
-    console.log(form_obj);
-    if ($('#year_min').val() != '' && $('#year_max').val() != '') {
-        if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
-            Swal.fire('Post Registration', 'Year range is not correct!', 'error');
-        } else {
-            call_post_filter_api(url, form_obj);
-        }
-    } else {
-        call_post_filter_api(url, form_obj);
-    }
-}
+//function loadPostWithFiltering() {
+//    let url = "./api/filtered_posts";
+//    var form_obj = new Object();
+//    $min_year = $('#year_min').val();
+//    $max_year = $('#year_max').val();
+//    form_obj.post_type = $('#cmb_post_type').val();
+//    form_obj.vehi_type = $('#cmb_vehi_type').val();
+//    form_obj.location = $('#cmb_city').val();
+//    form_obj.price_range = $('#cmb_price').val();
+//    form_obj.condition = $('#cmb_condition').val();
+//    form_obj.make = $('#cmb_make').val();
+//    form_obj.model = $('#model').val();
+//    form_obj.year_min = $min_year;
+//    form_obj.year_max = $max_year;
+//    form_obj.gear_type = $('#cmb_gear').val();
+//    form_obj.fuel_type = $('#cmb_fuel_type').val();
+//    console.log(form_obj);
+//    if ($('#year_min').val() != '' && $('#year_max').val() != '') {
+//        if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
+//            Swal.fire('Post Registration', 'Year range is not correct!', 'error');
+//        } else {
+//            call_post_filter_api(url, form_obj);
+//        }
+//    } else {
+//        call_post_filter_api(url, form_obj);
+//    }
+//}
 
 
-function call_post_filter_api(url, form_obj) {
-    try {
-        $.ajax({
-            type: "POST",
-            url: url,
-            dataSrc: "",
-            data: form_obj,
-            success: function (resp) {
-                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-                    callBack();
-                }
-            }
-        });
-    } catch (err) {
-
-    }
-}
+//function call_post_filter_api(url, form_obj) {
+//    try {
+//        $.ajax({
+//            type: "POST",
+//            url: url,
+//            dataSrc: "",
+//            data: form_obj,
+//            success: function (resp) {
+//                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+//                    callBack();
+//                }
+//            }
+//        });
+//    } catch (err) {
+//
+//    }
+//}
 
                             </script>
                             </body>

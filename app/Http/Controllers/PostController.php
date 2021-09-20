@@ -379,7 +379,7 @@ class PostController extends Controller {
                 );
             });
             $filtered_post_data = $post->paginate(5);
-            return view('auth.CustomerRegister');
+            return view('/home');
         }
 
         if ($post_type == "SPARE") {
