@@ -10,27 +10,26 @@
         <meta content="" name="keywords">
 
         <!-- Favicons -->
-        <link href="./assets/img/favicon.png" rel="icon">
-        <link href="./assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        <link href="{{ asset('assets/img/favicon.png') }}" rel="icon">
+        <link href="{{ asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
         <!-- Vendor CSS Files -->
-        <link href="./assets/vendor/animate.css/animate.min.css" rel="stylesheet">
-        <link href="./assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="./assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-        <link href="./assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-        <link href="./assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-        <link href="./assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-        <link href="./plugins/yearpicker/yearpicker.css" rel="stylesheet">
-        <link href="./plugins/select2/css/select2.css" rel="stylesheet">
-        <link href="./plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" rel="stylesheet" >
-        <link href="./plugins/jqpaginator/jqpaginator.css" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/animate.css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/yearpicker/yearpicker.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/select2/css/select2.css') }}" rel="stylesheet">
+        <link href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" rel="stylesheet" >
+        <link href="{{ asset('plugins/jqpaginator/jqpaginator.css') }}" rel="stylesheet">
         <!-- UIkit CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <!-- Template Main CSS File -->
-        <link href="./assets/css/style.css" rel="stylesheet">
+        <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
         <style>
 
             .add-font{
@@ -75,11 +74,11 @@
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto" href="./post_registration">Post Add</a></li>
+                        <li><a class="nav-link scrollto" href="{{ asset('post_registration') }}">Post Add</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Account</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                        <li><a class="nav-link scrollto" href="./login_cust">Login</a></li>
-                        <li><a class="nav-link scrollto" href="./register_customer">Register</a></li>
+                        <li><a class="nav-link scrollto" href="{{ asset('login_cust') }}">Login</a></li>
+                        <li><a class="nav-link scrollto" href="{{ asset('register_customer') }}./register_customer">Register</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -96,7 +95,7 @@
                 <div class="carousel-inner" role="listbox">
 
                     <!-- Slide 1 -->
-                    <div class="carousel-item active" style="background-image: url(assets/img/slide/slide-1.jpg)">
+                    <div class="carousel-item active" style="background-image: url({{asset('assets/img/slide/slide-1.jpg')}})">
                         <div class="carousel-container">
                             <div class="container">
                                 <h2 class="animate__animated animate__fadeInDown">WELCOME <span> VEHICLEWORLD</span></h2>
@@ -107,7 +106,7 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carousel-item" style="background-image: url(assets/img/slide/slide-2.jpg)">
+                    <div class="carousel-item" style="background-image: url({{asset('assets/img/slide/slide-2.jpg')}})>
                         <div class="carousel-container">
                             <div class="container">
                                 <h2 class="animate__animated animate__fadeInDown">Sell Vehicles Online</span></h2>
@@ -118,7 +117,7 @@
                     </div>
 
                     <!-- Slide 3 -->
-                    <div class="carousel-item" style="background-image: url(assets/img/slide/slide-3.jpg)">
+                    <div class="carousel-item" style="background-image: url({{asset('assets/img/slide/slide-3.jpg')}})">
                         <div class="carousel-container">
                             <div class="container">
                                 <h2 class="animate__animated animate__fadeInDown">Buy and contact sellers</span></h2>
@@ -127,9 +126,7 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
-
                 <a class="carousel-control-prev" href="#heroCarousel" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon bi bi-chevron-left" aria-hidden="true"></span>
                 </a>
@@ -179,19 +176,19 @@
                             <div class="form-group col-lg-3">
                                 <label for="cmb_make"><b>MAKE</b></label>
                                 <div>
-                                    <select id="cmb_make"  class="form-control"></select>
+                                    <select id="cmb_make"  name="cmb_make" class="form-control"></select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-3">
                                 <label for="cmb_model"><b>MODEL</b></label>
                                 <div>
-                                    <input type="text" id="model" class="form-control" placeholder="Enter the model of vehicle" max-length="150">
+                                    <input type="text" id="model" name="model" class="form-control" placeholder="Enter the model of vehicle" max-length="150">
                                 </div>
                             </div>
                             <div class="form-group col-lg-3">
                                 <label for="cmb_post_type"><b>POST TYPE</b></label>
                                 <div>
-                                    <select id="cmb_post_type" class="form-control">
+                                    <select id="cmb_post_type" name="cmb_post_type" class="form-control">
                                         <option value="VEHI">Vehicle</option>
                                         <option value="SPARE">Spare Parts</option>
                                     </select>
@@ -200,7 +197,7 @@
                             <div class="form-group col-lg-3">
                                 <label for="cmb_vehi_type"><b>Vehicle Type</b></label>
                                 <div>
-                                    <select id="cmb_vehi_type" class="form-control">
+                                    <select id="cmb_vehi_type" name="cmb_vehi_type" class="form-control">
                                         <option value=""> Any Type </option>
                                         <option value="cars">Car</option>
                                         <option value="vans">Van</option>
@@ -223,7 +220,7 @@
                             <div class="form-group col-lg-4">
                                 <label for="cmb_condition"><b>CONDITION</b></label>
                                 <div>
-                                    <select id="cmb_condition"  class="form-control">
+                                    <select id="cmb_condition" name="cmb_condition"class="form-control">
                                         <option value="">Select Condition</option>
                                         <option value="Used">Used</option>
                                         <option value="New">New</option>
@@ -233,7 +230,7 @@
                             <div class="form-group col-lg-4">
                                 <label for="cmb_price"><b>PRICE RANGE</b></label>
                                 <div>
-                                    <select id="cmb_price"  class="form-control">
+                                    <select id="cmb_price" name="cmb_price" class="form-control">
                                         <option value="Any">       Any     </option>
                                         <option value="< 100000">&lt; 100,000</option>
                                         <option value="100000-500000">100,000 - 500,000</option>
@@ -255,7 +252,7 @@
                             <div class="form-group col-lg-4">
                                 <label for="cmb_city"><b>LOCATION</b></label>
                                 <div>
-                                    <select id="cmb_city"  class="form-control">
+                                    <select id="cmb_city" name="cmb_city" class="form-control">
                                         <option value=""> Any City </option>
                                         <option value="Ambalangoda">Ambalangoda</option>
                                         <option value="Ampara">Ampara</option>
@@ -366,12 +363,12 @@
                         <div class="row m-2">
                             <div class="form-group col-lg-4">
                                 <label for=""><b>Year Range</b></label><br>
-                                <input type="text" id="year_min" class="yearpicker" value=""> <input type="text" id="year_max" class="yearpicker" value="">
+                                <label>MIN: <input type="text" id="year_min" name="year_min" class="yearpicker" value=""> MAX<input type="text" id="year_max" name="year_max" class="yearpicker" value=""></label>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="cmb_gear"><b>Gear</b></label>
                                 <div>
-                                    <select id="cmb_gear"  class="form-control">
+                                    <select id="cmb_gear" name="cmb_gear" class="form-control">
                                         <option value=""> Any Gear </option>
                                         <option value="Automatic">Auto</option>
                                         <option value="Manual">Manual</option>
@@ -381,7 +378,7 @@
                             <div class="form-group col-lg-4">
                                 <label for="cmb_fuel_type"><b>Fuel</b></label>
                                 <div>
-                                    <select id="cmb_fuel_type" class="form-control">
+                                    <select id="cmb_fuel_type" name="cmb_fuel_type" class="form-control">
                                         <option value=""> Any Fuel </option>
                                         <option value="petrol">Petrol</option>
                                         <option value="diesel">Diesel</option>
@@ -393,7 +390,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" id="search_adds" class="btn btn-md btn-success" value="SEARCH" style="font-weight: bold">SEARCH</button>
+                            <button type="submit" id="filter_btn" class="btn btn-md btn-success d-none" style="font-weight: bold">SEARCH</button>
                         </div>
                         </div>
                     </form>
@@ -411,13 +408,13 @@
                                     <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="./api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="{{asset('/api/get_post_profile/id').'/'.$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <div class="portfolio-wrap text-center">
-                                                            <img src='./storage{{$post->main_image}}' class='img-fluid cover m-2' style='height: 5em; width: 90%' alt='main_img'/>
+                                                            <img src="{{asset('storage/'.$post->main_image)}}" class='img-fluid cover m-2' style='height: 5em; width: 90%' alt='main_img'/>
                                                         </div>
                                                     </div>
                                                     <div class="col-7">
@@ -452,49 +449,40 @@
                                     <div class="copyright">
                                         &copy; Copyright <strong><span>Vehicleworld.com</span></strong>. All Rights Reserved
                                     </div>
-                                    <div class="credits">
-                                        <!--                                        All the links in the footer should remain intact. 
-                                                                                You can delete the links only if you purchased the pro version. 
-                                                                                Licensing information: https://bootstrapmade.com/license/ 
-                                                                                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ 
-                                                                                Designed by <a href="https://bootstrapmade.com/">Clementechs</a>-->
-                                    </div>
                                 </div>
                                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
                             </footer> 
                             <!--End Footer-->  
 
                             <!-- Vendor JS Files -->
-                            <script src="./assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-                            <script src="./assets/vendor/glightbox/js/glightbox.min.js"></script>
-                            <script src="./assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-                            <script src="./assets/vendor/php-email-form/validate.js"></script>
-                            <script src="./assets/vendor/swiper/swiper-bundle.min.js"></script>
-                            <script src="./plugins/jquery/jquery.min.js"></script>
-                            <script src="./js/commenFunctions/functions.js"></script>
-                            <script src="./plugins/yearpicker/yearpicker.js" async></script>
-                            <script src="./plugins/select2/js/select2.js"></script>
-                            <script src="./plugins/sweetalert2/sweetalert2.min.js"></script>
-                            <script src="./plugins/jqpaginator/jqpaginator.js"></script>
+                            <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+                            <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+                            <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+                            <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
+                            <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
+                            <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+                            <script src="{{ asset('js/commenFunctions/functions.js') }}"></script>
+                            <script src="{{ asset('plugins/yearpicker/yearpicker.js') }}" async></script>
+                            <script src="{{ asset('plugins/select2/js/select2.js') }}"></script>
+                            <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+                            <script src="{{ asset('plugins/jqpaginator/jqpaginator.js') }}"></script>
                             <!-- UIkit JS -->
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
 
                             <!-- Template Main JS File -->
-                            <script src="./assets/js/main.js"></script>
+                            <script src="{{ asset('assets/js/main.js') }}"></script>
                             <script>
 $(document).ready(function () {
-    loadMakes();
+    loadMakes(function () {
+        $('#filter_btn').removeClass('d-none');
+    });
     $('.yearpicker').yearpicker();
 });
 
-//$('#search_adds').click(function () {
-//    loadPostWithFiltering();
-//});
-
-function loadMakes() {
+function loadMakes(callBack) {
     let option = '';
-    ajaxRequest("GET", "./api/get_makes", null, function (resp) {
+    ajaxRequest("GET", "{{ asset('/api/get_makes') }}", null, function (resp) {
         if (resp.length == 0) {
             option += '<option value="">No Data</option>';
         } else {
@@ -510,54 +498,6 @@ function loadMakes() {
         }
     });
 }
-
-//function loadPostWithFiltering() {
-//    let url = "./api/filtered_posts";
-//    var form_obj = new Object();
-//    $min_year = $('#year_min').val();
-//    $max_year = $('#year_max').val();
-//    form_obj.post_type = $('#cmb_post_type').val();
-//    form_obj.vehi_type = $('#cmb_vehi_type').val();
-//    form_obj.location = $('#cmb_city').val();
-//    form_obj.price_range = $('#cmb_price').val();
-//    form_obj.condition = $('#cmb_condition').val();
-//    form_obj.make = $('#cmb_make').val();
-//    form_obj.model = $('#model').val();
-//    form_obj.year_min = $min_year;
-//    form_obj.year_max = $max_year;
-//    form_obj.gear_type = $('#cmb_gear').val();
-//    form_obj.fuel_type = $('#cmb_fuel_type').val();
-//    console.log(form_obj);
-//    if ($('#year_min').val() != '' && $('#year_max').val() != '') {
-//        if ($('#year_min').val() == $('#year_max').val() || parseInt($('#year_min').val()) > parseInt($('#year_max').val())) {
-//            Swal.fire('Post Registration', 'Year range is not correct!', 'error');
-//        } else {
-//            call_post_filter_api(url, form_obj);
-//        }
-//    } else {
-//        call_post_filter_api(url, form_obj);
-//    }
-//}
-
-
-//function call_post_filter_api(url, form_obj) {
-//    try {
-//        $.ajax({
-//            type: "POST",
-//            url: url,
-//            dataSrc: "",
-//            data: form_obj,
-//            success: function (resp) {
-//                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-//                    callBack();
-//                }
-//            }
-//        });
-//    } catch (err) {
-//
-//    }
-//}
-
                             </script>
                             </body>
 

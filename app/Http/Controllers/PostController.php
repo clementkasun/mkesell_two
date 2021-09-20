@@ -277,18 +277,20 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function filtered_adds(Request $request) {
-        $vehi_type = $request->vehi_type;
-        $post_type = $request->post_type;
-        $location = $request->location;
-        $price_range = $request->price_range;
-        $condition = $request->condition;
-        $make = $request->make;
-        $model = $request->model;
-        $year_min = $request->year_min;
-        $year_max = $request->year_max;
-        $gear_type = $request->gear_type;
-        $fuel_type = $request->fuel_type;
+        $request_data = $request->toArray();
 
+        $vehi_type = $request_data['cmb_vehi_type'];
+        $post_type = $request_data['cmb_post_type'];
+        $price_range = $request_data['cmb_price'];
+        $condition = $request_data['cmb_condition'];
+        $make = $request_data['cmb_make'];
+        $location = $request_data['cmb_city'];
+        $year_min = $request_data['year_min'];
+        $year_max = $request_data['year_max'];
+        $gear_type = $request_data['cmb_gear'];
+        $fuel_type = $request_data['cmb_fuel_type'];
+        $model = $request_data['model'];
+                
         if ($post_type == "VEHI") {
             $post = Post::when($post_type == "VEHI", function($p) {
                         return $p->where('posts.deleted_at', '=', null)
@@ -379,7 +381,7 @@ class PostController extends Controller {
                 );
             });
             $filtered_post_data = $post->paginate(5);
-            return view('/home');
+             return view('/home')->with(['posts' => $filtered_post_data]);
         }
 
         if ($post_type == "SPARE") {

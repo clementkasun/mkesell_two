@@ -52,7 +52,7 @@ Route::get('/get_posts', [PostController::class, 'show']);
 Route::get('/get_post_profile/id/{post_id}', [PostController::class, 'get_post_profile']);
 Route::get('/get_posts_type/id/{post_id}/{post_type}', [PostController::class, 'edit']);
 Route::get('/get_selected_post/id/{post_id}', [PostController::class, 'get_selected_post']);
-Route::post('/filtered_posts', [PostController::class, 'filtered_adds']);
+Route::any('/filtered_posts', [PostController::class, 'filtered_adds']);
 Route::put('/update_post/id/{post_id}', [PostController::class, 'update']);
 Route::delete('/delete_post/id/{post_id}', [PostController::class, 'destroy']);
 
