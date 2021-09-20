@@ -26,6 +26,7 @@
         <link href="{{ asset('plugins/select2/css/select2.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') }}" rel="stylesheet" >
         <link href="{{ asset('plugins/jqpaginator/jqpaginator.css') }}" rel="stylesheet">
+        <link href="{{ asset('assets/vendor/boxicons/css/boxicons.min.css') }}" rel="stylesheet">
         <!-- UIkit CSS -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/css/uikit.min.css" />
         <!-- Template Main CSS File -->
@@ -89,7 +90,6 @@
         <!-- ======= Hero Section ======= -->
         <section id="hero">
             <div id="heroCarousel" data-bs-interval="5000" class="carousel slide carousel-fade" data-bs-ride="carousel">
-
                 <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
                 <div class="carousel-inner" role="listbox">
@@ -170,7 +170,7 @@
 
                 </div>
                 <section id="search_container" class="bg-secondary text-light">
-                    <form id="search_form" action="{{url('./api/filtered_posts')}}" method="post">
+                    <form id="search_form" action="{{url('/filtered_posts')}}" method="post">
                         @csrf
                         <div class="row m-2">
                             <div class="form-group col-lg-3">
@@ -363,7 +363,14 @@
                         <div class="row m-2">
                             <div class="form-group col-lg-4">
                                 <label for=""><b>Year Range</b></label><br>
-                                <label>MIN: <input type="text" id="year_min" name="year_min" class="yearpicker" value=""> MAX<input type="text" id="year_max" name="year_max" class="yearpicker" value=""></label>
+                                <div class='row'>
+                                    <div class="col-12 col-md-6">
+                                        <input type="text" id="year_min" name="year_min" class="yearpicker" placeholder="MIN" autocomplete="off">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <input type="text" id="year_max" name="year_max" class="yearpicker" placeholder="MAX" autocomplete="off">
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="cmb_gear"><b>Gear</b></label>
@@ -414,7 +421,7 @@
                                                 <div class="row">
                                                     <div class="col-5">
                                                         <div class="portfolio-wrap text-center">
-                                                            <img src="{{asset('storage/'.$post->main_image)}}" class='img-fluid cover m-2' style='height: 5em; width: 90%' alt='main_img'/>
+                                                            <img src="{{asset('storage/'.$post->main_image)}}" class='img-fluid cover m-2' style='height: 7em; width: 90%' alt='main_img'/>
                                                         </div>
                                                     </div>
                                                     <div class="col-7">

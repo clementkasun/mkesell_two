@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\View;
 use Illuminate\Http\Request;
 
 class PostController extends Controller {
@@ -290,7 +292,7 @@ class PostController extends Controller {
         $gear_type = $request_data['cmb_gear'];
         $fuel_type = $request_data['cmb_fuel_type'];
         $model = $request_data['model'];
-                
+
         if ($post_type == "VEHI") {
             $post = Post::when($post_type == "VEHI", function($p) {
                         return $p->where('posts.deleted_at', '=', null)
@@ -381,7 +383,7 @@ class PostController extends Controller {
                 );
             });
             $filtered_post_data = $post->paginate(5);
-             return view('/home')->with(['posts' => $filtered_post_data]);
+            return view('home')->with(['posts' => $filtered_post_data]);
         }
 
         if ($post_type == "SPARE") {
@@ -437,7 +439,7 @@ class PostController extends Controller {
                 );
             });
             $filtered_spare_data = $spare->paginate(5);
-            return redirect('./home', ['posts' => $filtered_spare_data]);
+            return view('home')->with(['posts' => $filtered_spare_data]);
         }
     }
 
