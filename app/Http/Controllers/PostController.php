@@ -277,9 +277,8 @@ class PostController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function filtered_adds(Request $request) {
-        
-        $post_type = $request->post_type;
         $vehi_type = $request->vehi_type;
+        $post_type = $request->post_type;
         $location = $request->location;
         $price_range = $request->price_range;
         $condition = $request->condition;
@@ -334,7 +333,6 @@ class PostController extends Controller {
             $post = $post->when($gear_type != '', function ($p) use($gear_type) {
                 return $p->where('vehicles.gear_type', $gear_type);
             });
-
             $post = $post->when($vehi_type != '', function ($p) use($vehi_type) {
                 return $p->where('vehicles.vehicle_type', $vehi_type);
             });
@@ -380,8 +378,8 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_data = $post->paginate(100);;
-            return Redirect::route('home', ['posts' => $filtered_data]);
+            $filtered_post_data = $post->paginate(5);
+            return view('auth.CustomerRegister');
         }
 
         if ($post_type == "SPARE") {
@@ -422,7 +420,7 @@ class PostController extends Controller {
                 }
             });
 
-            $spare = $spare->when($post_type == "SPARE", function ($p) use($location) {
+            $spare = $spare->when($post_type == "SPARE", function ($p) {
                 return $p->select(
                                 'posts.id AS id',
                                 'posts.post_type',
@@ -436,8 +434,8 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_data = $spare->get();
-            return $filtered_data;
+            $filtered_spare_data = $spare->paginate(5);
+            return redirect('./home', ['posts' => $filtered_spare_data]);
         }
     }
 

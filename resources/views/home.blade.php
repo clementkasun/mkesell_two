@@ -50,7 +50,6 @@
     </head>
 
     <body>
-
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -71,7 +70,7 @@
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center">
                 <h1 class="logo me-auto"><a href="./all_adds_view_two">VEHICLEWORLD.COM</a></h1>
-                <nav id="navbar" class="navbar">
+                <nav id="navbar" class="navbar ml-1 mr-1">
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
@@ -174,7 +173,8 @@
 
                 </div>
                 <section id="search_container" class="bg-secondary text-light">
-                    <form id="search_form">
+                    <form id="search_form" action="{{url('./api/filtered_posts')}}" method="post">
+                        @csrf
                         <div class="row m-2">
                             <div class="form-group col-lg-3">
                                 <label for="cmb_make"><b>MAKE</b></label>
@@ -201,7 +201,7 @@
                                 <label for="cmb_vehi_type"><b>Vehicle Type</b></label>
                                 <div>
                                     <select id="cmb_vehi_type" class="form-control">
-                                        <option value="Any"> Any Type </option>
+                                        <option value=""> Any Type </option>
                                         <option value="cars">Car</option>
                                         <option value="vans">Van</option>
                                         <option value="suvs">SUV / Jeep</option>
@@ -256,7 +256,7 @@
                                 <label for="cmb_city"><b>LOCATION</b></label>
                                 <div>
                                     <select id="cmb_city"  class="form-control">
-                                        <option value="Any"> Any City </option>
+                                        <option value=""> Any City </option>
                                         <option value="Ambalangoda">Ambalangoda</option>
                                         <option value="Ampara">Ampara</option>
                                         <option value="Anuradapura">Anuradapura</option>
@@ -372,7 +372,7 @@
                                 <label for="cmb_gear"><b>Gear</b></label>
                                 <div>
                                     <select id="cmb_gear"  class="form-control">
-                                        <option value="Any"> Any Gear </option>
+                                        <option value=""> Any Gear </option>
                                         <option value="Automatic">Auto</option>
                                         <option value="Manual">Manual</option>
                                     </select>
@@ -382,7 +382,7 @@
                                 <label for="cmb_fuel_type"><b>Fuel</b></label>
                                 <div>
                                     <select id="cmb_fuel_type" class="form-control">
-                                        <option value="Any"> Any Fuel </option>
+                                        <option value=""> Any Fuel </option>
                                         <option value="petrol">Petrol</option>
                                         <option value="diesel">Diesel</option>
                                         <option value="electric">Electric</option>
@@ -393,9 +393,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 text-center mt-2">
-                                <input type="button" id="search_adds" class="btn btn-md btn-success" value="SEARCH" style="font-weight: bold">
-                            </div>
+                            <button type="submit" id="search_adds" class="btn btn-md btn-success" value="SEARCH" style="font-weight: bold">SEARCH</button>
+                        </div>
                         </div>
                     </form>
                 </section>
@@ -454,11 +453,11 @@
                                         &copy; Copyright <strong><span>Vehicleworld.com</span></strong>. All Rights Reserved
                                     </div>
                                     <div class="credits">
-<!--                                        All the links in the footer should remain intact. 
-                                        You can delete the links only if you purchased the pro version. 
-                                        Licensing information: https://bootstrapmade.com/license/ 
-                                        Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ 
-                                        Designed by <a href="https://bootstrapmade.com/">Clementechs</a>-->
+                                        <!--                                        All the links in the footer should remain intact. 
+                                                                                You can delete the links only if you purchased the pro version. 
+                                                                                Licensing information: https://bootstrapmade.com/license/ 
+                                                                                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/green-free-one-page-bootstrap-template/ 
+                                                                                Designed by <a href="https://bootstrapmade.com/">Clementechs</a>-->
                                     </div>
                                 </div>
                                 <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -513,7 +512,7 @@ function loadMakes() {
 }
 
 function loadPostWithFiltering() {
-    let url = "./api/filtered_adds";
+    let url = "./api/filtered_posts";
     var form_obj = new Object();
     $min_year = $('#year_min').val();
     $max_year = $('#year_max').val();
@@ -558,77 +557,6 @@ function call_post_filter_api(url, form_obj) {
 
     }
 }
-
-//function loadPostPage() {
-//    let url = "./api/get_posts/";
-//    let datas = call_form_unfiltered_api(url);
-//}
-//
-//function call_form_unfiltered_api(url) {
-//    let option = '';
-//    try {
-//        $.ajax({
-//            type: "GET",
-//            url: url,
-//            success: function (resp) {
-//                option += "<div class='row'>";
-//                $.each(resp, function (index, row) {
-//                    option += "<div class='col-12 col-md-3 line_content'>";
-//                    option += '<div class="card card-primary m-2">';
-//                    option += "<span class='text-center'><img src='./storage/" + row.main_image + "' class='img-fluid cover m-2' style='height: 8em; width: 95%' alt='main_img'/><span>";
-//                    option += '<div class="portfolio-info m-2 add-font">';
-//                    if (row.post_title != null) {
-//                        option += "<a href='./post/id/" + row.id + "'><span class='text-dark'><b>" + row.post_title + "</b></span></a><br>";
-//                    }
-//                    if (row.vehicle_condition != null) {
-//                        option += "<span> <b>Vehicle Condition: " + row.vehicle_condition + "</b></span><br>";
-//                    }
-//                    if (row.model != null) {
-//                        option += "<span> <b>Model: " + row.model + "</b></span><br>";
-//                    }
-//                    if (row.manufactured_year != null) {
-//                        option += "<span> <b>Manufactured Year: " + row.manufactured_year + "</b></span><br>";
-//                    }
-//                    if (row.price != null) {
-//                        option += "<span> <b>Price: " + row.price + "</span><br>";
-//                    }
-//                    if (row.engine_capacity != null) {
-//                        option += "<span> <b>Engine Capacity: " + row.engine_capacity + "</b></span><br>";
-//                    }
-//                    if (row.millage != null) {
-//                        option += "<span> <b>Millage: " + row.millage + "</b></span><br>";
-//                    }
-//                    if (row.part_condition != null) {
-//                        option += "<span> <b>Part Condtion: " + row.part_condition + "</b></span><br>";
-//                    }
-//                    if (row.part_used_in != null) {
-//                        option += "<span> <b>Part Used: " + row.part_used_in + "</b></span><br>";
-//                    }
-//                    if (row.part_category != null) {
-//                        option += "<span> <b>Part Category: " + row.part_category + "</b></span><br>";
-//                    }
-//                    if (row.part_name_brand != null) {
-//                        option += "<span> Part Brand: " + row.part_name_brand + "</b></span><br>";
-//                    }
-//                    option += '<div class="portfolio-links">';
-//                    option += '<a href="./storage/' + row.main_image + '" data-gallery="portfolioGallery" class="portfolio-lightbox"><i class="bx bx-plus"></i></a>';
-//                    option += '<a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>';
-//                    option += '</div>';
-//                    option += '</div>';
-//                    option += '</div>';
-//                    option += '</div>';
-//                });
-//                option += "</div>";
-//                $('#promoted_adds').html(option);
-//                if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-//                    callBack();
-//                }
-//            }
-//        });
-//    } catch (err) {
-//
-//    }
-//}
 
                             </script>
                             </body>

@@ -15,12 +15,18 @@
 <link rel="stylesheet" href="../../../dist/css/adminlte.min.css">
 <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="../../../plugins/sweetalert2/sweetalert2.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <!-- sweet alert -->
 
 <style>
     .invalid {
         color: #FF0000;
     }
+
+    .mySlides {
+        display:none;
+    }
+
 </style>
 @endsection
 @section('content')
@@ -46,14 +52,30 @@
                     <div class="card-body box-profile" style="border-radius: 15px">
                         <div class="row bg-light">
                             <div class="col-md-12">
-                                <div class="text-center">
+                                <div class="w3-content w3-display-container">
                                     @if($post_data->main_image != null)
-                                    <img class="profile-user-img circle-img img-fluid img-circle" src="{{asset("/storage/".$post_data->main_image)}}" style="width:10em; height:10em;" />
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->main_image)}}" style="width:100%">
+                                    @endif
+                                    @if($post_data->image_1 != null)
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->image_1)}}" style="width:100%">
+                                    @endif
+                                    @if($post_data->image_2 != null)
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->image_2)}}" style="width:100%">
+                                    @endif
+                                    @if($post_data->image_3 != null)
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->image_3)}}" style="width:100%">
+                                    @endif
+                                    @if($post_data->image_4 != null)
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->image_4)}}" style="width:100%">
+                                    @endif
+                                    @if($post_data->image_5 != null)
+                                    <img class="mySlides" src="{{asset("/storage/".$post_data->image_5)}}" style="width:100%">
                                     @endif
 
-                                    @if($post_data->main_image == null)
-                                    <img class="profile-user-img circle-img img-fluid img-circle" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="post main picture" />
-                                    @endif
+                                    <div class="text-center mt-2">
+                                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                                    </div>
                                 </div>
 
                                 <h3 class=" profile-username text-center"><b>{{ $post_data->post_title}}</b></h3>
@@ -178,6 +200,8 @@
                                     <span class="text-muted">-</span>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="col-md-6 pt-2">
                                 <div class="form-group">
                                     <label for="ongoing_lease">Ongoing Lease: </label><br>
                                     @if($post_data->on_going_lease != null)
@@ -224,61 +248,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="col-md-6 pt-2">
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <label>Image One</label></br>
-                                            @if($post_data->image_1 != null)
-                                            <img id="image_one" name="image_one" src="{{asset("/storage/".$post_data->image_1)}}" alt="image one" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                            @if($post_data->image_1 == null)
-                                            <img id="image_one" name="image_one" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Image One" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label>Image Two</label></br>
-                                            @if($post_data->image_2 != null)
-                                            <img id="image_two" name="image_two" src="{{asset("/storage/".$post_data->image_2)}}" alt="image two" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                            @if($post_data->image_2 == null)
-                                            <img id="image_two" name="image_two" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" NIC image" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-1">
-                                            <label>Image Three</label></br>
-                                            @if($post_data->image_3 != null)
-                                            <img id="image_three" name="image_three" src="{{asset("/storage/".$post_data->image_3)}}" alt="image_three" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                            @if($post_data->image_3 == null)
-                                            <img id="image_three" name="image_three" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                        </div>
-                                        <div class="col-md-6 mt-1">
-                                            <label>Image Four</label></br>
-                                            @if($post_data->image_4 != null)
-                                            <img id="image_three" name="image_three" src="{{asset("/storage/".$post_data->image_4)}}}" alt="image_four" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                            @if($post_data->image_4 == null)
-                                            <img id="image_three" name="image_three" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-6 mt-1">
-                                            <label>Image Five</label></br>
-                                            @if($post_data->image_5 != null)
-                                            <img id="image_five" name="image_five" src="{{asset("/storage/".$post_data->image_5)}}" alt="image_five" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                            @if($post_data->image_5 == null)
-                                            <img id="image_five" name="image_five" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=" Degree certificate" width="100%" height="90%" style="border-radius: 15px" />
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!-- /.card-body -->
@@ -321,6 +290,26 @@
 <script src="../../../js/commenFunctions/file_upload.js"></script>
 
 <script>
+                                            var slideIndex = 1;
+                                            showDivs(slideIndex);
 
+                                            function plusDivs(n) {
+                                                showDivs(slideIndex += n);
+                                            }
+
+                                            function showDivs(n) {
+                                                var i;
+                                                var x = document.getElementsByClassName("mySlides");
+                                                if (n > x.length) {
+                                                    slideIndex = 1
+                                                }
+                                                if (n < 1) {
+                                                    slideIndex = x.length
+                                                }
+                                                for (i = 0; i < x.length; i++) {
+                                                    x[i].style.display = "none";
+                                                }
+                                                x[slideIndex - 1].style.display = "block";
+                                            }
 </script>
 @endsection
