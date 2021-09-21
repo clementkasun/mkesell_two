@@ -50,6 +50,9 @@
     </head>
 
     <body>
+          @if(Session::has('posts') != false){
+            {{$posts = Session::get("posts")}}
+          @endif
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -83,7 +86,6 @@
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
-
             </div>
         </header><!-- End Header -->
 
@@ -106,7 +108,7 @@
                     </div>
 
                     <!-- Slide 2 -->
-                    <div class="carousel-item" style="background-image: url({{asset('assets/img/slide/slide-2.jpg')}})>
+                    <div class="carousel-item" style="background-image: url({{asset('assets/img/slide/slide-2.jpg')}})">
                         <div class="carousel-container">
                             <div class="container">
                                 <h2 class="animate__animated animate__fadeInDown">Sell Vehicles Online</span></h2>
@@ -411,11 +413,12 @@
                         <div id="promoted_adds">
                             <div class="container">
                                 <div class="row">
-                                    @foreach ($posts as $post)
+                                    @if($posts[0] != null)
+                                    @foreach($posts as $post)
                                     <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="{{asset('/api/get_post_profile/id').'/'.$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="/api/get_post_profile/id/$post->id" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -437,6 +440,7 @@
                                     </div>
                                     @endforeach
                                     <div class="text-center mt-5"><div>{{ $posts->links('pagination::bootstrap-4') }}</div></div>
+                                    @endif
                                 </div>
 
                             </div>

@@ -383,7 +383,8 @@ class PostController extends Controller {
                 );
             });
             $filtered_post_data = $post->paginate(5);
-            return view('home')->with(['posts' => $filtered_post_data]);
+            session()->flash('posts', $filtered_post_data);
+            return redirect()->back();
         }
 
         if ($post_type == "SPARE") {
