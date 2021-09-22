@@ -65,6 +65,11 @@
     </head>
 
     <body>
+        @if(Session::has('posts') != false)
+        <?php
+        $posts = Session::get("posts");
+        ?>
+        @endif
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">

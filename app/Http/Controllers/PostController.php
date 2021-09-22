@@ -382,7 +382,7 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_post_data = $post->paginate(5);
+            $filtered_post_data = $post->paginate(100);
             session()->flash('posts', $filtered_post_data);
             return redirect()->back();
         }
@@ -439,7 +439,7 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_spare_data = $spare->paginate(5);
+            $filtered_spare_data = $spare->paginate(100);
             return view('home')->with(['posts' => $filtered_spare_data]);
         }
     }
