@@ -65,11 +65,6 @@
     </head>
 
     <body>
-        @if(Session::has('posts') != false)
-        <?php
-        $posts = Session::get("posts");
-        ?>
-        @endif
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -435,7 +430,7 @@
                                     <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="/api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="./api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -495,7 +490,7 @@
                             <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
                             <script src="{{ asset('plugins/jqpaginator/jqpaginator.js') }}"></script>
                             <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
-                            
+
                             <!-- UIkit JS -->
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>

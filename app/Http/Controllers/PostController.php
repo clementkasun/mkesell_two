@@ -280,7 +280,7 @@ class PostController extends Controller {
      */
     public function filtered_adds(Request $request) {
         $request_data = $request->toArray();
-
+        
         $vehi_type = $request_data['cmb_vehi_type'];
         $post_type = $request_data['cmb_post_type'];
         $price_range = $request_data['cmb_price'];
@@ -292,7 +292,7 @@ class PostController extends Controller {
         $gear_type = $request_data['cmb_gear'];
         $fuel_type = $request_data['cmb_fuel_type'];
         $model = $request_data['model'];
-
+           
         if ($post_type == "VEHI") {
             $post = Post::when($post_type == "VEHI", function($p) {
                         return $p->where('posts.deleted_at', '=', null)
