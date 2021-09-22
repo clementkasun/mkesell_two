@@ -189,7 +189,7 @@
 
                 </div>
                 <section id="search_container" class="bg-secondary text-light">
-                    <form id="search_form" action="/filtered_posts" method="post">
+                    <form id="search_form" action="{{url('./filtered_posts')}}" method="post">
                         @csrf
                         <div class="row m-2">
                             <div class="form-group col-lg-3">
