@@ -3,6 +3,18 @@
 
     <head>
         @yield('styles')
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-208237465-1">
+        </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-208237465-1');
+        </script>
     </head>
 
     <body class="hold-transition sidebar-mini layout-fixed text-sm">

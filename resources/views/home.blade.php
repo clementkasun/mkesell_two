@@ -50,9 +50,11 @@
     </head>
 
     <body>
-          @if(Session::has('posts') != false){
-            {{$posts = Session::get("posts")}}
-          @endif
+        @if(Session::has('posts') != false)
+        <?php
+         $posts = Session::get("posts");
+        ?>
+        @endif
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -418,7 +420,7 @@
                                     <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="/api/get_post_profile/id/$post->id" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="/api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">

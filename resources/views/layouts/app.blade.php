@@ -14,7 +14,18 @@
         <link rel="stylesheet" href="./css/app.css">
 
         @livewireStyles
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-208237465-1">
+        </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
 
+            gtag('config', 'UA-208237465-1');
+        </script>
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
     </head>
