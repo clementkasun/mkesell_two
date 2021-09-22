@@ -493,6 +493,7 @@
                             <script src="{{ asset('plugins/select2/js/select2.js') }}"></script>
                             <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
                             <script src="{{ asset('plugins/jqpaginator/jqpaginator.js') }}"></script>
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                             <!-- UIkit JS -->
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit-icons.min.js"></script>
