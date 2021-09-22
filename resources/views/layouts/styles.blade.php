@@ -32,6 +32,16 @@
 <link rel="stylesheet" href="{{asset("/plugins/toastr/toastr.min.css")}}">
 <!-- SweetAlert2 -->
 <link rel="stylesheet" href="{{asset("/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css")}}">
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-208237465-1">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-208237465-1');
+</script>
 <style>
     .has-error{
         color:red;
