@@ -47,12 +47,24 @@
             }
 
         </style>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-208237465-1">
+        </script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-208237465-1');
+        </script>
     </head>
 
     <body>
         @if(Session::has('posts') != false)
         <?php
-         $posts = Session::get("posts");
+        $posts = Session::get("posts");
         ?>
         @endif
         <!-- ======= Top Bar ======= -->
@@ -486,31 +498,31 @@
                             <!-- Template Main JS File -->
                             <script src="{{ asset('assets/js/main.js') }}"></script>
                             <script>
-$(document).ready(function () {
-    loadMakes(function () {
-        $('#filter_btn').removeClass('d-none');
-    });
-    $('.yearpicker').yearpicker();
-});
-
-function loadMakes(callBack) {
-    let option = '';
-    ajaxRequest("GET", "{{ asset('/api/get_makes') }}", null, function (resp) {
-        if (resp.length == 0) {
-            option += '<option value="">No Data</option>';
-        } else {
-            option = '<option value="">Select Make</option>';
-            $.each(resp, function (index, row) {
-                option += '<option value="' + row.id + '">' + row.make_name + '</option>';
+            $(document).ready(function () {
+                loadMakes(function () {
+                    $('#filter_btn').removeClass('d-none');
+                });
+                $('.yearpicker').yearpicker();
             });
-        }
-        $('#cmb_make').html(option);
-        //                    $('#cmb_make').select2();
-        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-            callBack();
-        }
-    });
-}
+
+            function loadMakes(callBack) {
+                let option = '';
+                ajaxRequest("GET", "{{ asset('/api/get_makes') }}", null, function (resp) {
+                    if (resp.length == 0) {
+                        option += '<option value="">No Data</option>';
+                    } else {
+                        option = '<option value="">Select Make</option>';
+                        $.each(resp, function (index, row) {
+                            option += '<option value="' + row.id + '">' + row.make_name + '</option>';
+                        });
+                    }
+                    $('#cmb_make').html(option);
+                    //                    $('#cmb_make').select2();
+                    if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+                        callBack();
+                    }
+                });
+            }
                             </script>
                             </body>
 
