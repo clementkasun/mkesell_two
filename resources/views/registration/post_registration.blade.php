@@ -136,13 +136,13 @@
                                     <div class="form-group">
                                         <label for="price">Price</label>                                    
                                         <div id="the-basics">
-                                            <input type="number" class="form-control" name="price" id="price" placeholder='Enter the price'>
+                                            <input type="number" class="form-control" name="price" id="price" placeholder='Enter the price' required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="location">Address</label>                                    
                                         <div>
-                                            <textarea id="location" name="location" class="form-control" placeholder="Enter the address"></textarea>
+                                            <textarea id="location" name="location" class="form-control" placeholder="Enter the address" required></textarea>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -235,42 +235,42 @@
                                         <div class="form-group col-lg-3">
                                             <label for="isAc">AC</label>
                                             <div>
-                                                <input type="checkbox" name="isAc" id="isAc" required>
+                                                <input type="checkbox" name="isAc" id="isAc">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="isPowerSteer">Power Steer</label><br>
                                             <div>
-                                                <input type="checkbox" name="isPowerSteer" id="isPowerSteer" required>
+                                                <input type="checkbox" name="isPowerSteer" id="isPowerSteer">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="isPowerMirroring">Power Mirroring</label>
                                             <div>
-                                                <input type="checkbox" name="isPowerMirroring" id="isPowerMirroring" required>
+                                                <input type="checkbox" name="isPowerMirroring" id="isPowerMirroring">
                                             </div>
                                         </div>
                                         <div class="form-group col-lg-3">
                                             <label for="isPowerWindow">Power Window</label>
                                             <div>
-                                                <input type="checkbox" name="isPowerMirroring" id="isPowerWindow" required>
+                                                <input type="checkbox" name="isPowerMirroring" id="isPowerWindow">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group col-lg-3">
-                                        <label for="on_going_lease">On Going Lease</label>
-                                        <div>
-                                            <input type="checkbox" name="on_going_lease" id="on_going_lease" required>
+                                            <label for="on_going_lease">On Going Lease</label>
+                                            <div>
+                                                <input type="checkbox" name="on_going_lease" id="on_going_lease">
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                 </section>
                                 <section id="spare_part_sec" class="d-none col-md-6">
                                     <div class="form-group">
                                         <label for="part_category">Part Category</label>
                                         <div>
-                                            <select id="part_category" name="part_category" class="form-control w-100">
+                                            <select id="part_category" name="part_category" class="form-control w-100" required>
                                                 <option value="">Select</option>
                                                 <option value="Air Conditioning &amp; Heating">Air Conditioning &amp; Heating</option>
                                                 <option value="Air Intake &amp; Fuel Delivery">Air Intake &amp; Fuel Delivery</option>
@@ -414,61 +414,91 @@ function loadMakesCombo(selected, callBack) {
 }
 
 $("#save_post").click(function () {
+    var is_valid = jQuery("#post_registration").valid();
+    if (is_valid) {
+        let object = {
+            user_id: $('#user_id').val(),
+            post_type: $('#post_type').val(),
+            post_title: $('#post_title').val(),
+            vehicle_type: $('#vehicle_type').val(),
+            condition: $('#condition').val(),
+            make_id: $('#make_id').val(),
+            price: $('#price').val(),
+            location: $('#location').val(),
+            additional_info: $('#additional_info').val(),
+            model: $('#model').val(),
+            start_type: $('#start_type').val(),
+            manufactured_year: $('#manufactured_year').val(),
+            on_going_lease: $('input[name="on_going_lease"]:checked').val(),
+            transmission: $("#transmission").val(),
+            fuel_type: $("#fuel_type").val(),
+            engine_capacity: $("#engine_capacity").val(),
+            millage: $("#millage").val(),
+            isAc: $('input[name="isAc"]:checked').val(),
+            isPowerSteer: $('input[name="isPowerSteer"]:checked').val(),
+            isPowerMirroring: $('input[name="isPowerMirroring"]:checked').val(),
+            isPowerWindow: $('input[name="isPowerWindow"]:checked').val(),
+            part_category: $('#part_category').val(),
+        };
 
-    let object = {
-        user_id: $('#user_id').val(),
-        post_type: $('#post_type').val(),
-        post_title: $('#post_title').val(),
-        vehicle_type: $('#vehicle_type').val(),
-        condition: $('#condition').val(),
-        make_id: $('#make_id').val(),
-        price: $('#price').val(),
-        location: $('#location').val(),
-        additional_info: $('#additional_info').val(),
-        model: $('#model').val(),
-        start_type: $('#start_type').val(),
-        manufactured_year: $('#manufactured_year').val(),
-        on_going_lease: $('input[name="on_going_lease"]:checked').val(),
-        transmission: $("#transmission").val(),
-        fuel_type: $("#fuel_type").val(),
-        engine_capacity: $("#engine_capacity").val(),
-        millage: $("#millage").val(),
-        isAc: $('input[name="isAc"]:checked').val(),
-        isPowerSteer: $('input[name="isPowerSteer"]:checked').val(),
-        isPowerMirroring: $('input[name="isPowerMirroring"]:checked').val(),
-        isPowerWindow: $('input[name="isPowerWindow"]:checked').val(),
-        part_category: $('#part_category').val(),
-    };
+        object.main_image = $('#main_image')[0].files[0];
+        object.image_one = $('#image_one')[0].files[0];
+        object.image_two = $('#image_two')[0].files[0];
+        object.image_three = $('#image_three')[0].files[0];
+        object.image_four = $('#image_four')[0].files[0];
+        object.image_five = $('#image_five')[0].files[0];
 
-    object.main_image = $('#main_image')[0].files[0];
-    object.image_one = $('#image_one')[0].files[0];
-    object.image_two = $('#image_two')[0].files[0];
-    object.image_three = $('#image_three')[0].files[0];
-    object.image_four = $('#image_four')[0].files[0];
-    object.image_five = $('#image_five')[0].files[0];
-
-    let url = "./api/save_post";
-    ulploadFileWithData(url, object, function (result) {
-        // ajaxRequest("POST", url, data, function (result) {
-        if (result.status == 1) {
-            Swal.fire(
-                    'Post Registration',
-                    'Successfully Posted!',
-                    'success'
-                    );
+        let url = "./api/save_post";
+        ulploadFileWithData(url, object, function (result) {
+            // ajaxRequest("POST", url, data, function (result) {
+            if (result.status == 1) {
+                Swal.fire(
+                        'Post Registration',
+                        'Successfully Posted!',
+                        'success'
+                        );
 //            location.reload();
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: result.msg
-            })
-        }
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: result.msg
+                })
+            }
 //        $('#degree_registration').trigger("reset");
-        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-            callBack(result);
+            if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
+                callBack(result);
+            }
+        });
+    }
+});
+
+var post_registration;
+post_registration = $("#post_registration").validate({
+    errorClass: "invalid",
+    rules: {
+        tel: {
+            valid_lk_phone: true,
+        },
+        email: {
+            valide_email: true,
         }
-    });
+    },
+    highlight: function (element) {
+        $(element).parent().addClass('has-error');
+    },
+    unhighlight: function (element) {
+        $(element).parent().removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'validation-error-message help-block form-helper bold',
+    errorPlacement: function (error, element) {
+        if (element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
 });
 
 jQuery.validator.setDefaults({
@@ -510,6 +540,7 @@ jQuery.validator.addMethod("valide_email", function (value, element) {
 jQuery.validator.addMethod("valid_lk_phone", function (value, element) {
     return this.optional(element) || /^0[7][0-9]{8}$/.test(value);
 }, "Please enter a valid phone number");
+
 function formValidation() {
     let response = true;
     if ($('#Telephone').val().trim().length !== 10) {

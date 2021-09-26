@@ -48,8 +48,8 @@ class PostController extends Controller {
                                 'spare_parts.part_category',
                                 'posts.additional_info',
                                 'posts.created_at'
-                        )->paginate(100);
-
+                        )->paginate(4);
+        
         return view('home', ['posts' => $post_all]);
     }
 
@@ -382,7 +382,7 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_post_data = $post->paginate(100);
+            $filtered_post_data = $post->paginate(4);
             session()->flash('posts', $filtered_post_data);
             return redirect()->back();
         }
@@ -439,7 +439,7 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_spare_data = $spare->paginate(100);
+            $filtered_spare_data = $spare->paginate(4);
             return view('home')->with(['posts' => $filtered_spare_data]);
         }
     }

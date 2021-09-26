@@ -112,7 +112,7 @@
                                     </a>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-5">
                                 <div class="row bg-dark" style="border-radius: 15px">
                                     <div class="col-md-6">
                                         <h3 class=" profile-username text-center"><b>{{ $post_data->post_title}}</b></h3>
