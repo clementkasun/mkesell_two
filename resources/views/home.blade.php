@@ -46,6 +46,10 @@
             .w-5{
                 display: none;    
             }
+            
+            .yearpicker{
+                background-color: white;
+            }
 
         </style>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -95,7 +99,7 @@
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
                         <li><a class="nav-link scrollto" href="#services">Services</a></li>
-                        <li><a class="nav-link scrollto" href="{{ asset('post_registration') }}">Post Add</a></li>
+                        <li><a class="nav-link scrollto" href="{{ asset('post_registration') }}">Post Create</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Account</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                         <li><a class="nav-link scrollto" href="{{ asset('login_cust') }}">Login</a></li>
