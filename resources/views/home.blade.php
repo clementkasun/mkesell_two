@@ -388,10 +388,10 @@
                                 <label for=""><b>Year Range</b></label><br>
                                 <div class='row'>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" id="year_min" name="year_min" class="yearpicker" placeholder="MIN" autocomplete="off">
+                                        <input type="text" id="year_min" name="year_min" class="yearpicker" placeholder="MIN" autocomplete="off" width="100%">
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <input type="text" id="year_max" name="year_max" class="yearpicker" placeholder="MAX" autocomplete="off">
+                                        <input type="text" id="year_max" name="year_max" class="yearpicker" placeholder="MAX" autocomplete="off" width="100%">
                                     </div>
                                 </div>
                             </div>
