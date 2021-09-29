@@ -61,7 +61,6 @@
                 dataLayer.push(arguments);
             }
             gtag('js', new Date());
-
             gtag('config', 'UA-208237465-1');
         </script>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5060922363210547"
@@ -94,7 +93,7 @@
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center">
                 <h1 class="logo me-auto"><a href="./all_adds_view_two">VEHICLEWORLD.COM</a></h1>
-                <nav id="navbar" class="navbar ml-1 mr-1">
+                <nav id="navbar" class="navbar ml-1 mr-1 p-3">
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                         <li><a class="nav-link scrollto" href="#about">About</a></li>
@@ -103,7 +102,7 @@
                         <li><a class="nav-link scrollto" href="#contact">Account</a></li>
                         <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
                         <li><a class="nav-link scrollto" href="{{ asset('login_cust') }}">Login</a></li>
-                        <li><a class="nav-link scrollto" href="{{ asset('register_customer') }}./register_customer">Register</a></li>
+                        <li><a class="nav-link scrollto" href="{{ asset('register_customer') }}">Register</a></li>
                     </ul>
                     <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
@@ -427,7 +426,7 @@
                 </section>
                 <!-- ======= Portfolio Section ======= -->
                 <section id="portfolio" class="portfolio">
-                    
+
                     <div class="container">
                         <div class="section-title">
                             <h2>PROMOTING ADDS</h2>
@@ -435,6 +434,14 @@
                         <div id="promoted_adds">
                             <div class="container">
                                 <div class="row">
+                                    <div class="pagination-wrapper">
+                                        <div id="cards-container">
+                                            <!-- cards will be put here by pagination.js -->
+                                        </div>
+                                        <div id="pagination-container">
+                                            <!-- the pagination controls will be put here by pagination.js -->
+                                        </div>
+                                    </div>
                                     @if($posts[0] != null)
                                     @foreach($posts as $post)
                                     <div class='col-12 col-md-6'>
@@ -463,6 +470,7 @@
                                     @endforeach
                                     <div class="text-center mt-5"><div>{{ $posts->links('pagination::bootstrap-4') }}</div></div>
                                     @endif
+
                                 </div>
 
                             </div>
@@ -498,8 +506,8 @@
                             <script src="{{ asset('plugins/yearpicker/yearpicker.js') }}"></script>
                             <script src="{{ asset('plugins/select2/js/select2.js') }}"></script>
                             <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
-                            <script src="{{ asset('plugins/jqpaginator/jqpaginator.js') }}"></script>
                             <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
+                            <script src="{{ asset('plugins/pagination/pagination.js') }}"></script>
 
                             <!-- UIkit JS -->
                             <script src="https://cdn.jsdelivr.net/npm/uikit@3.7.3/dist/js/uikit.min.js"></script>
@@ -514,7 +522,9 @@
                 });
                 $('.yearpicker').yearpicker();
             });
-
+            $('#load_posts').click(function () {
+                load_posts();
+            });
             function loadMakes(callBack) {
                 let option = '';
                 ajaxRequest("GET", "{{ asset('/api/get_makes') }}", null, function (resp) {
@@ -533,6 +543,7 @@
                     }
                 });
             }
+
                             </script>
                             </body>
 
