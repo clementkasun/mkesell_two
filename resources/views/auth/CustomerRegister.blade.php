@@ -108,7 +108,7 @@
                                 <div class="col-md-6">
                                     <div class="bg-secondary text-center p-5" style="width: 100%; height: 100%; border-radius: 15px">
                                         <div class="bg-light" style="width: 95%; height: 60%">
-                                            <img src="{{asset('./storage/System/avater.png')}}" style="width: 95%; height: 80%"/><br>
+                                            <img src="{{asset('storage/System/avater.png')}}" style="width: 95%; height: 80%"/><br>
                                             <div><h1><b>VEHICLEWORLD.COM</b></h1></div>
                                         </div>
                                     </div>
