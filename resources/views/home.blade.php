@@ -92,7 +92,7 @@
         <!-- ======= Header ======= -->
         <header id="header" class="d-flex align-items-center">
             <div class="container d-flex align-items-center">
-                <h1 class="logo me-auto">VEHICLEWORLD.COM</h1>
+                <h2 class="logo me-auto">VEHICLEWORLD.COM</h2><i class="bi bi-list mobile-nav-toggle"></i>
                 <nav id="navbar" class="navbar">
                     <ul>
                         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
@@ -104,7 +104,6 @@
                         <li><a class="nav-link scrollto" href="{{ asset('login_cust') }}">Login</a></li>
                         <li><a class="nav-link scrollto" href="{{ asset('register_customer') }}">Register</a></li>
                     </ul>
-                    <i class="bi bi-list mobile-nav-toggle"></i>
                 </nav><!-- .navbar -->
             </div>
         </header><!-- End Header -->
