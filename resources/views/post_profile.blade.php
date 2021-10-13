@@ -48,7 +48,7 @@
                 <div class="card card-primary card-outline">
                     <div class="card-body box-profile" style="border-radius: 15px">
                         <div class="row bg-light">
-                            <div class="col-md-6">
+                            <div class="col-md-6 mt-5">
                                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
                                         @if($post_data->main_image != null)

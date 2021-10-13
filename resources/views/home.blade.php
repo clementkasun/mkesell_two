@@ -68,11 +68,6 @@
     </head>
 
     <body>
-        @if(Session::has('posts') != false)
-        <?php
-        $posts = Session::get("posts");
-        ?>
-        @endif
         <!-- ======= Top Bar ======= -->
         <section id="topbar" class="d-flex align-items-center">
             <div class="container d-flex justify-content-center justify-content-md-between">
@@ -191,7 +186,7 @@
 
                 </div>
                 <section id="search_container" class="bg-secondary text-light">
-                    <form id="search_form" action="./filtered_posts" method="post">
+                    <form id="search_form" method="POST" action="/api/filtered_posts">
                         @csrf
                         <div class="row m-2">
                             <div class="form-group col-lg-3">
@@ -382,7 +377,7 @@
                             </div>
                         </div>
                         <div class="row m-2">
-                            <div class="form-group col-lg-4">
+                            <div class="form-group col-lg-6">
                                 <label for=""><b>Year Range</b></label><br>
                                 <div class='row'>
                                     <div class="col-12 col-md-6">
@@ -393,32 +388,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group col-lg-4">
-                                <label for="cmb_gear"><b>Gear</b></label>
-                                <div>
-                                    <select id="cmb_gear" name="cmb_gear" class="form-control">
-                                        <option value=""> Any Gear </option>
-                                        <option value="Automatic">Auto</option>
-                                        <option value="Manual">Manual</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group col-lg-4">
-                                <label for="cmb_fuel_type"><b>Fuel</b></label>
-                                <div>
-                                    <select id="cmb_fuel_type" name="cmb_fuel_type" class="form-control">
-                                        <option value=""> Any Fuel </option>
-                                        <option value="petrol">Petrol</option>
-                                        <option value="diesel">Diesel</option>
-                                        <option value="electric">Electric</option>
-                                        <option value="hybrid">Hybrid</option>
-                                        <option value="gas">Gas</option>
-                                    </select>
+                            <div class="form-group col-lg-6">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <label for="cmb_gear"><b>Gear</b></label>
+                                        <div>
+                                            <select id="cmb_gear" name="cmb_gear" class="form-control">
+                                                <option value=""> Any Gear </option>
+                                                <option value="Automatic">Auto</option>
+                                                <option value="Manual">Manual</option>
+                                            </select>
+                                        </div> 
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="cmb_fuel_type"><b>Fuel</b></label>
+                                        <div>
+                                            <select id="cmb_fuel_type" name="cmb_fuel_type" class="form-control">
+                                                <option value=""> Any Fuel </option>
+                                                <option value="petrol">Petrol</option>
+                                                <option value="diesel">Diesel</option>
+                                                <option value="electric">Electric</option>
+                                                <option value="hybrid">Hybrid</option>
+                                                <option value="gas">Gas</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <button type="submit" id="filter_btn" class="btn btn-md btn-success d-none" style="font-weight: bold">SEARCH</button>
+                            <button type="sumbit" id="filter_btn" class="btn btn-md btn-success d-none">SEARCH</button>
                         </div>
                         </div>
                     </form>
@@ -438,7 +437,7 @@
                                     <div class='col-12 col-md-6'>
                                         <div class="card bg-light m-2">
                                             <div class="card-header">
-                                                <b><a href="./api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
+                                                <b><a href="/api/get_post_profile/id/{{$post->id}}" style="color: black">{{$post->post_title}}</a></b>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -459,7 +458,16 @@
                                         </div>
                                     </div>
                                     @endforeach
-                                    <div class="text-center mt-5"><div>{{ $posts->links('pagination::bootstrap-4') }}</div></div>
+
+                                    @if(isset($request))
+
+                                    <div class="text-center mt-5">{{ $posts->appends($request)->links('pagination::bootstrap-4') }}</div>
+                                    @endif
+
+                                    @if(!isset($request))
+                                    <div class="text-center mt-5">{{ $posts->links('pagination::bootstrap-4') }}</div>
+                                    @endif
+
                                     @endif
                                 </div>
                             </div>
@@ -510,9 +518,7 @@
                     $('#filter_btn').removeClass('d-none');
                 });
                 $('.yearpicker').yearpicker();
-            });
-            $('#load_posts').click(function () {
-                load_posts();
+
             });
 
             function loadMakes(callBack) {

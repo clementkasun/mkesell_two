@@ -49,7 +49,7 @@ class PostController extends Controller {
                                 'posts.additional_info',
                                 'posts.created_at'
                         )->paginate(4);
-        
+
         return view('home', ['posts' => $post_all]);
     }
 
@@ -280,19 +280,63 @@ class PostController extends Controller {
      */
     public function filtered_adds(Request $request) {
         $request_data = $request->toArray();
+
+        $vehi_type = null;
+        $post_type = null;
+        $price_range = null;
+        $condition = null;
+        $make = null;
+        $location = null;
+        $year_min = null;
+        $year_max = null;
+        $gear_type = null;
+        $fuel_type = null;
+        $model = null;
         
-        $vehi_type = $request_data['cmb_vehi_type'];
-        $post_type = $request_data['cmb_post_type'];
-        $price_range = $request_data['cmb_price'];
-        $condition = $request_data['cmb_condition'];
-        $make = $request_data['cmb_make'];
-        $location = $request_data['cmb_city'];
-        $year_min = $request_data['year_min'];
-        $year_max = $request_data['year_max'];
-        $gear_type = $request_data['cmb_gear'];
-        $fuel_type = $request_data['cmb_fuel_type'];
-        $model = $request_data['model'];
-           
+        if(isset($request_data['cmb_vehi_type'])){
+             $vehi_type = $request_data['cmb_vehi_type'];
+        
+        }
+        if(isset($request_data['cmb_post_type'])){
+            $post_type = $request_data['cmb_post_type'];
+        
+        }
+        if(isset($request_data['cmb_price'])){
+            $price_range = $request_data['cmb_price'];
+       
+        }
+        if(isset($request_data['cmb_condition'])){
+             $condition = $request_data['cmb_condition'];
+       
+        }
+        if(isset($request_data['cmb_make'])){
+             $make = $request_data['cmb_make'];
+        
+        }
+        if(isset($request_data['cmb_city'])){
+            $location = $request_data['cmb_city'];
+        
+        }
+        if(isset($request_data['year_min'])){
+            $year_min = $request_data['year_min'];
+        
+        }
+        if(isset($request_data['year_max'])){
+            $year_max = $request_data['year_max'];
+        
+        }
+        if(isset($request_data['cmb_gear'])){
+            $gear_type = $request_data['cmb_gear'];
+        
+        }
+        if(isset($request_data['cmb_fuel_type'])){
+            $fuel_type = $request_data['cmb_fuel_type'];
+        
+        }
+        if(isset($request_data['model'])){
+            $model = $request_data['model'];
+        }
+        
         if ($post_type == "VEHI") {
             $post = Post::when($post_type == "VEHI", function($p) {
                         return $p->where('posts.deleted_at', '=', null)
@@ -382,9 +426,8 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_post_data = $post->paginate(4);
-            session()->flash('posts', $filtered_post_data);
-            return redirect()->back();
+            $filtered_post_data = $post->paginate(100);
+            return view('/home', ['posts' => $filtered_post_data, 'request' => $request_data]);
         }
 
         if ($post_type == "SPARE") {
@@ -439,8 +482,8 @@ class PostController extends Controller {
                                 'posts.created_at'
                 );
             });
-            $filtered_spare_data = $spare->paginate(4);
-            return view('home')->with(['posts' => $filtered_spare_data]);
+            $filtered_spare_data = $spare->paginate(100);
+            return view('home', ['posts' => $filtered_spare_data, 'request' => $request_data]);
         }
     }
 
