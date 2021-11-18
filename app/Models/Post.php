@@ -4,20 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Post extends Model
-{
+class Post extends Model {
+
     use HasFactory;
-    
-    public function Customer(){
+    use SoftDeletes;
+
+    protected $fillable = array('post_title', 'price', 'additional_info', 'location', 'condition','post_type', 'main_image', 'image_one', 'image_two', 'image_three', 'image_four', 'image_five', 'vehicle_id', 'spare_part_id', 'cust_id', 'make_id');
+
+    public function Customer() {
         return $this->belongsTo(Customer::class);
     }
-    
-    public function SparePart(){
+
+    public function SparePart() {
         return $this->hasOne(SparePart::class);
     }
-    
-    public function Vehicle(){
+
+    public function Vehicle() {
         return $this->hasOne(Vehicle::class);
     }
+
 }

@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Jobs\VacancyNotify;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Schema;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -24,8 +24,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // $this->app->bindMethod([VacancyNotification::class, 'handle'], function ($job, $app) {
-        //     return $job->handle($app->make(VacancyNotification::class));
-        // });
+         Schema::defaultStringLength(191);
     }
 }

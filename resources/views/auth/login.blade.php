@@ -1,8 +1,7 @@
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="logo">
-            <img style="width: 240px; height: 85px;" src="../../dist/img/Ceytech-2020-Logo.png">
-            <p><b> Graduate Management System </b></p>
+            <img style="width: 240px; height: 85px;" src="./dist/img/vehicle_logos.png">
         </x-slot>
 
         <x-jet-validation-errors class="mb-4" />
@@ -42,7 +41,7 @@
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}
                 </x-jet-button>
-                <a href="/register" class="ml-4" role="button">Register</a>
+                <a href="./register_customer" class="ml-4" role="button">Register</a>
             </div>
         </form>
         <script>

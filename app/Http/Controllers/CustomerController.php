@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller {
@@ -13,7 +15,7 @@ class CustomerController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view(registration.customer_reg);
+        return view(registration . customer_reg);
     }
 
     /**
@@ -29,11 +31,11 @@ class CustomerController extends Controller {
                     'firstName' => 'required|max:50|string',
                     'lastName' => 'sometimes|nullable|max:50|string',
                     'address' => 'sometimes|max:100',
-                    'contactNo' => ['nullable', new contactNo],
+                    'contactNo' => 'required|max: 10',
                     'email' => 'required|email',
-                    'nic' => ['sometimes', 'nullable', 'unique:users', new nationalID],
+                    'nic' => 'required',
                     'roll' => 'integer|required',
-                    'password' => 'required|confirmed|min:6',
+                    'password' => 'required|min:6',
                     'city' => 'required|max:255|string'
                         // 'institute' => 'required|integer',
                 ]);
@@ -48,9 +50,11 @@ class CustomerController extends Controller {
                 $user->roll_id = request('roll');
                 $user->password = Hash::make(request('password'));
                 $user->save();
-                UserController::PrevilagesAdd($user);
 
-                $cust_name = request('firstName') + request('lastName');
+                $first_name = request('firstName');
+                $last_name = request('lastName');
+                $cust_name = $first_name . " " . $last_name;
+
                 Customer::create([
                     'cust_name' => $cust_name,
                     'phone_number' => request('contactNo'),
@@ -162,4 +166,19 @@ class CustomerController extends Controller {
         }
     }
 
+    public function email_nic_exist(Request $request) {
+        $email = $request->email;
+        $nic = $request->nic;
+        $cust_nic = User::where('nic', '=', $nic)->first();
+        $user_email = User::where('email', '=', $email)->first();
+        $cust_email = Customer::where('email', '=', $email)->first();
+
+        if (is_null($cust_nic) && is_null($user_email) && is_null($cust_email)) {
+            return 0;
+        } 
+        
+        if(!is_null($cust_nic) || !is_null($user_email) || !is_null($cust_email)){
+            return 1;
+        }
+    }
 }

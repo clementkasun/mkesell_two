@@ -1,31 +1,13 @@
 <?php
-
-use App\Http\Controllers\GraduateController;
-use App\Models\User;
-use App\Models\Roll;
-use Illuminate\Http\Request;
-use App\Models\Graduate;
-use App\Models\Notifications;
-use App\Models\Vacancy;
-use App\Notifications\VacancyNotification;
-use Illuminate\Support\Facades\Notification;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RollController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\LevelController;
-use App\Http\Controllers\ResultController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\VehicleMakeController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TestJsonController;
 use App\Http\Controllers\JsonResultsController;
-use App\Http\Controllers\JsonResultsController\DistrictController;
-use App\Http\Controllers\JsonResultsController\DsDivisionController;
-use App\Http\Controllers\JsonResultsController\ServiceCategoryController;
-use App\Http\Controllers\JsonResultsController\ElectorateDivisionController;
-use App\Http\Controllers\JsonResultsController\PendingGraduateController;
-use App\Http\Controllers\JsonResultsController\VacancyController;
-use App\Http\Controllers\JsonResultsController\VacancyAttachmentController;
-use Maatwebsite\Excel\Validators\ValidationException;
 
 /*
   |--------------------------------------------------------------------------
@@ -47,7 +29,7 @@ Route::apiResource('/json', TestJsonController::class); // get payment history b
 Route::apiResource('/result/json', JsonResultsController::class); // save json results
 Route::get('/result/export/{id}', [JsonResultsController::class, 'export']); // save json results
 
-//api
+//api rolls, privileges and users
 Route::post('/rolls/rollId/{id}', [RollController::class, 'store']);
 Route::delete('/rolls/rollId/{id}', [RollController::class, 'destroy']);
 Route::get('/rolls/levelId/{id}', [LevelController::class, 'rollsByLevel'])->name('rolls_by_level');
@@ -61,8 +43,21 @@ Route::put('/user/active/{id}', [UserController::class, 'activeDeletedUser']); /
 Route::get('/user/mobile/', [UserController::class, 'getMobileUsers']); //get (Level 2) mobile users
 Route::middleware('auth:api')->get('/level/institutes/id/{id}', [LevelController::class, 'instituteById'])->name('level_institues_by_id');
 Route::post('/add_user', [UserController::class, 'create']); //add a user
-
-Route::post('/auth_test', [App\Http\Controllers\JsonResultsController::class, 'authTest']);
+Route::post('/auth_test', [JsonResultsController::class, 'authTest']);
 Route::post('/sanctum/token', [UserController::class, 'authToken']);
-Route::post('/save_post', [App\Http\Controllers\PostController,  'store']);
-Route::get('/get_all_post', [App\Http\Controllers\PostController,  'show']);
+
+//apis for post 
+Route::post('/save_post', [PostController::class, 'store']);
+Route::get('/get_posts', [PostController::class, 'show']);
+Route::get('/get_post_profile/id/{post_id}', [PostController::class, 'get_post_profile']);
+Route::get('/get_posts_type/id/{post_id}/{post_type}', [PostController::class, 'edit']);
+Route::get('/get_selected_post/id/{post_id}', [PostController::class, 'get_selected_post']);
+Route::any('/filtered_posts', [PostController::class, 'filtered_adds']);
+Route::put('/update_post/id/{post_id}', [PostController::class, 'update']);
+Route::delete('/delete_post/id/{post_id}', [PostController::class, 'destroy']);
+
+Route::get('get_makes', [VehicleMakeController::class, 'get_vehicle_makes']);
+
+Route::post('/save_customer', [CustomerController::class, 'store']);
+
+Route::post('/is_email_nic_exist', [CustomerController::class, 'email_nic_exist']);

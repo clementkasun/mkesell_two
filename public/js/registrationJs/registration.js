@@ -1,24 +1,3 @@
-function loadDistrictCombo(selected, callBack) {
-    let option = '';
-    ajaxRequest("GET", "/api/get_districts/", null, function (resp) {
-        if (resp.length == 0) {
-            option += '<option value="">No Data</option>';
-        } else {
-            $.each(resp, function (index, row) {
-                if (!isNaN(parseInt(selected)) && selected == row.id) {
-                    option += '<option value="' + row.id + '" selected>' + row.district_name + '</option>';
-                } else {
-                    option += '<option value="' + row.id + '">' + row.district_name + '</option>';
-                }
-            });
-        }
-        $('#district').html(option);
-        $('#district').select2();
-        if (typeof callBack !== 'undefined' && callBack != null && typeof callBack === "function") {
-            callBack();
-        }
-    });
-}
 
 function loadDsdivisionCombo(selected, district_id, callBack) {
     let option = '';
@@ -332,46 +311,25 @@ function save_graduate_details() {
     });
 }
 
-function update_graduate_details(id) {
-    url = "/api/update_graduate/" + id;
+function save_cus_details() {
+    url = "./api/save_customer";
     let object = {
-        first_name: $('#first_name').val(),
-        last_name: $('#last_name').val(),
-        nvq_level: $('#nvq_level').val(),
-        address: $('#address').val(),
-        tel: $('#Telephone').val(),
-        year: $('#degree_year').val(),
+        firstName: $('#firstName').val(),
+        lastName: $('#lastName').val(),
+        contactNo: $('#contactNo').val(),
         email: $('#email').val(),
         nic: $('#nic').val(),
-        person_type: $('#person_type').val(),
-        dob: $('#dob').val(),
-        degree: $('#degree').val(),
-        sector_id: $("select[name='sector'] option:selected").val(),
-        // is_from_sector: $('input[name="is_from_sector"]:checked').val(),
-        degree_type: $("select[name='degree_type'] option:selected").val(),
-        degree_class: $("select[name='class'] option:selected").val(),
-        gn_division_id: $("select[name='gn_division_id'] option:selected").val(),
-        university_id: $("select[name='university_id'] option:selected").val(),
-        ds_division_id: $("select[name='ds_division'] option:selected").val(),
-        service_category_id: $("select[name='service_category_id'] option:selected").val(),
-        electorate_division_id: $("select[name='elec_division'] option:selected").val(),
-        educational_qualification: $('#educational_qualification').val(),
-        district_id: $("select[name='district'] option:selected").val(),
-        civil_status: $('input[name="civil_status"]:checked').val(),
-        gender: $('input[name="gender"]:checked').val(),
+        city: $('#location').val(),
+        roll: 2,
+        password: $('#password_origin').val(),
     };
-
-    object.nic_image = $('#id_image')[0].files[0];
-    object.nic_image_two = $('#id_image_two')[0].files[0];
-    object.degree_cert = $('#degree_cert')[0].files[0];
-    object.user_image = $('#user_img')[0].files[0];
 
     ulploadFileWithData(url, object, function (result) {
         // ajaxRequest("POST", url, data, function (result) {
         if (result.status == 1) {
             Swal.fire(
                     'Graduate registration',
-                    'Successfully Updated!',
+                    'Successfully Saved!',
                     'success'
                     );
             location.reload();
